@@ -23,6 +23,7 @@ public class PlayGame {
 	private void humanInfo(Player player, int i){
 		System.out.print("Please enter name for player " +i+": ");
 		player.setName(userName.nextLine());
+		player.setNumber(i);
 		System.out.println();
 		System.out.println("Human Player "+player.getName()+" created...");
 		System.out.println();
@@ -31,6 +32,7 @@ public class PlayGame {
 	private void compInfo(Player player, int i){
 		
 		player.setName("Computer");
+		player.setNumber(i);
 		System.out.println();
 		System.out.println("AI Player "+player.getName()+" created...");
 		System.out.println();
