@@ -83,7 +83,7 @@ public class Driver
 				System.out.println("Please input a position to take on the board: (ex: 3D) ");
 				positionInput = positionScanner.nextLine();
 				
-				while(positionInput.length() != 2)
+				while(!myGrid.getAvailablePositions().contains(positionInput))
 				{
 					System.out.println("Invalid input! Please try again: (ex: 5E) ");
 					positionInput = positionScanner.nextLine();

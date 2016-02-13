@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Grid 
 {
-	ArrayList<String> availablePositions;
+	private ArrayList<String> availablePositions;
 	final int BOARD_ROWS = 8;
 	final int BOARD_COLS  = 14;
 	private String[][] gameGrid;
@@ -206,6 +206,9 @@ public class Grid
 		int valueX = 0;
 		int valueY = 0;
 		
+		availablePositions.remove("desiredPosition");
+		play.addPosition(desiredPosition);
+		
 		switch(desiredPosition.charAt(0))
 		{
 			case '1':
@@ -322,12 +325,10 @@ public class Grid
 		if(play.getNumber() == 0)
 		{
 			gameGrid[x][y] = "\u25CF";
-			play.addPosition(x, y);
 		}
 		else
 		{
 			gameGrid[x][y] = "\u25CB";
-			play.addPosition(x, y);
 		}
 		printGrid();
 	}
@@ -344,5 +345,10 @@ public class Grid
 			System.out.println();
 		}
 		System.out.println();
+	}
+	
+	ArrayList<String> getAvailablePositions()
+	{
+		return this.availablePositions;
 	}
 }

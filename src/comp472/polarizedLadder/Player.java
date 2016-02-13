@@ -1,7 +1,9 @@
 package comp472.polarizedLadder;
+import java.util.ArrayList;
 
 public class Player {
 	
+	private ArrayList<String> playerPositions = new ArrayList<String>();
 	private int number;
 	private String name;
 	private boolean hasWon = false;
@@ -43,9 +45,9 @@ public class Player {
 	}
 	
 	//method to keep track of player's owned positions on the board
-	public void addPosition(int x, int y)
+	public void addPosition(String position)
 	{
-		
+		playerPositions.add(position);
 	}
 	
 	//checks if player has won
