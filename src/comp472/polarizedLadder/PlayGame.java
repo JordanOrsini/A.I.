@@ -12,9 +12,9 @@ public class PlayGame {
 	public PlayGame(Player[] players) {
 		for(int i = 0; i < players.length; i++){
 			if(players[i].getClass().equals(HumanPlayer.class))
-				humanInfo(players[i], i+1);
+				humanInfo(players[i], i);
 			else
-				compInfo(players[i], i+1);
+				compInfo(players[i], i);
 		}
 		System.out.println("Game start!");
 		System.out.println();
