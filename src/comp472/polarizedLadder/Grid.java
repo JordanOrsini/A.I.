@@ -4,29 +4,15 @@ import java.util.ArrayList;
 public class Grid 
 {
 	private ArrayList<String> availablePositions;
-	final int BOARD_ROWS = 8;
-	final int BOARD_COLS  = 14;
+	final int GRID_ROWS = 8;
+	final int GRID_COLUMNS  = 14;
 	private String[][] gameGrid;
 	
 	//default constructor
 	public Grid()
 	{
 
-		gameGrid = new String[BOARD_ROWS][BOARD_COLS];
-//		
-//		for (int i = 0; i < BOARD_ROWS; i++) {
-//			
-//			for (int j = 0; j < BOARD_COLS; j++) {
-//				
-//				if ( (j == 0) && (i >= 1) )  {
-//					
-//					// add y axis legend
-//					gameGrid[i][j] = Integer.toString(8-i);
-//				
-//				}
-//			
-//			}
-//		}
+		gameGrid = new String[GRID_ROWS][GRID_COLUMNS];
 		
 		gameGrid[0][0] = "7";
 		gameGrid[0][1] = " ";
@@ -200,7 +186,8 @@ public class Grid
 		availablePositions.add("1L");
 		availablePositions.add("1M");
 	}
-	
+
+
 	void convertInput(String desiredPosition, Player play)
 	{
 		int valueX = 0;
@@ -350,5 +337,9 @@ public class Grid
 	ArrayList<String> getAvailablePositions()
 	{
 		return this.availablePositions;
+	}
+	
+	public String[][] getGameGrid() {
+		return gameGrid;
 	}
 }
