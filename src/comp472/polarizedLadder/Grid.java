@@ -1,7 +1,9 @@
 package comp472.polarizedLadder;
+import java.util.ArrayList;
 
 public class Grid 
 {
+	ArrayList<String> availablePositions;
 	final int BOARD_ROWS = 8;
 	final int BOARD_COLS  = 14;
 	private String[][] gameGrid;
@@ -145,6 +147,174 @@ public class Grid
 		gameGrid[7][11] = "K";
 		gameGrid[7][12] = "L";
 		gameGrid[7][13] = "M";	
+	
+		availablePositions = new ArrayList<String>();
+		
+		availablePositions.add("1A");
+		availablePositions.add("2B");
+		availablePositions.add("1B");
+		availablePositions.add("3C");
+		availablePositions.add("2C");
+		availablePositions.add("1C");
+		availablePositions.add("4D");
+		availablePositions.add("3D");
+		availablePositions.add("2D");
+		availablePositions.add("1D");
+		availablePositions.add("5E");
+		availablePositions.add("4E");
+		availablePositions.add("3E");
+		availablePositions.add("2E");
+		availablePositions.add("1E");
+		availablePositions.add("6F");
+		availablePositions.add("5F");
+		availablePositions.add("4F");
+		availablePositions.add("3F");
+		availablePositions.add("2F");
+		availablePositions.add("1F");
+		availablePositions.add("7G");
+		availablePositions.add("6G");
+		availablePositions.add("5G");
+		availablePositions.add("4G");
+		availablePositions.add("3G");
+		availablePositions.add("2G");
+		availablePositions.add("1G");
+		availablePositions.add("6H");
+		availablePositions.add("5H");
+		availablePositions.add("4H");
+		availablePositions.add("3H");
+		availablePositions.add("2H");
+		availablePositions.add("1H");
+		availablePositions.add("5I");
+		availablePositions.add("4I");
+		availablePositions.add("3I");
+		availablePositions.add("2I");
+		availablePositions.add("1I");
+		availablePositions.add("4J");
+		availablePositions.add("3J");
+		availablePositions.add("2J");
+		availablePositions.add("1J");
+		availablePositions.add("3K");
+		availablePositions.add("2K");
+		availablePositions.add("1K");
+		availablePositions.add("2L");
+		availablePositions.add("1L");
+		availablePositions.add("1M");
+	}
+	
+	void convertInput(String desiredPosition, Player play)
+	{
+		int valueX = 0;
+		int valueY = 0;
+		
+		switch(desiredPosition.charAt(0))
+		{
+			case '1':
+			{
+				valueX = 6;
+				break;
+			}
+			case '2':
+			{
+				valueX = 5;
+				break;
+			}
+			case '3':
+			{
+				valueX = 4;
+				break;
+			}
+			case '4':
+			{
+				valueX = 3;
+				break;
+			}
+			case '5':
+			{
+				valueX = 2;
+				break;
+			}
+			case '6':
+			{
+				valueX = 1;
+				break;
+			}
+			case '7':
+			{
+				valueX = 0;
+				break;
+			}
+		}
+		
+		switch(desiredPosition.charAt(1))
+		{
+			case 'A':
+			{
+				valueY = 1;
+				break;
+			}
+			case 'B':
+			{
+				valueY = 2;
+				break;
+			}
+			case 'C':
+			{
+				valueY = 3;
+				break;
+			}
+			case 'D':
+			{
+				valueY = 4;
+				break;
+			}
+			case 'E':
+			{
+				valueY = 5;
+				break;
+			}
+			case 'F':
+			{
+				valueY = 6;
+				break;
+			}
+			case 'G':
+			{
+				valueY = 7;
+				break;
+			}
+			case 'H':
+			{
+				valueY = 8;
+				break;
+			}
+			case 'I':
+			{
+				valueY = 9;
+				break;
+			}
+			case 'J':
+			{
+				valueY = 10;
+				break;
+			}
+			case 'K':
+			{
+				valueY = 11;
+				break;
+			}
+			case 'L':
+			{
+				valueY = 12;
+				break;
+			}
+			case 'M':
+			{
+				valueY = 13;
+				break;
+			}
+		}
+		
+		modifyGrid(valueX, valueY, play);
 	}
 	
 	void modifyGrid(int x, int y, Player play)
@@ -159,6 +329,7 @@ public class Grid
 			gameGrid[x][y] = "\u25CB";
 			play.addPosition(x, y);
 		}
+		printGrid();
 	}
 	
 	//prints the current state of the game grid to console

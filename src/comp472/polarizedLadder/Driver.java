@@ -89,7 +89,7 @@ public class Driver
 					positionInput = positionScanner.nextLine();
 				}
 				
-//				myGrid.convertInput(positionInput, players[i]);
+				myGrid.convertInput(positionInput, players[i]);
 			}
 		}
 	}
