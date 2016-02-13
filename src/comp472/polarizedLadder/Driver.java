@@ -7,6 +7,9 @@ public class Driver
 	{
 		Scanner kb = new Scanner(System.in);
 		Scanner userName = new Scanner (System.in);
+		Scanner positionScanner = new Scanner (System.in);
+		
+		String positionInput;
 		
 		int gameMode;
 		Player p1;
@@ -90,9 +93,16 @@ public class Driver
 			{
 				myPlayers[i].gameOver();
 				System.out.println("Player \"" + myPlayers[i].getName() + "\",");
-				System.out.println("Please input a position to take on the board: ");
-				myGrid.modifyGrid(5,5, myPlayers[i]);
-				myGrid.printGrid();
+				System.out.println("Please input a position to take on the board: (ex: 3D) ");
+				positionInput = positionScanner.nextLine();
+				
+				while(positionInput.length() != 2)
+				{
+					System.out.println("Invalid input! Please try again: (ex: 5E) ");
+					positionInput = positionScanner.nextLine();
+				}
+				
+				myGrid.convertInput(positionInput, myPlayers[i]);
 			}
 		}
 	}
