@@ -1,64 +1,56 @@
 package comp472.polarizedLadder;
+import java.awt.Point;
 import java.util.ArrayList;
 
 public class Player {
 	
-	private ArrayList<String> playerPositions = new ArrayList<String>();
+	private ArrayList<Point> playerPositions = new ArrayList<Point>();
 	private int number;
 	private String name;
 	private boolean hasWon = false;
+	private String gamePiece;
 	
-	//empty constructor
-	public Player()
-	{
-	}
-	
-	//parametrized constructor
-	public Player(String name, int number)
-	{
-		this.number = number;
-		this.name = name;
+	public Player() {
+		super();
 	}
 	
-	public void setNumber(int number) {
-		this.number = number;
+	public Player(String name, int number) {
+		super();
 	}
-
-	public void setName(String name) {
-		this.name = name;
+	public ArrayList<Point> getPlayerPositions() {
+		return playerPositions;
 	}
-
-	public void setHasWon(boolean hasWon) {
-		this.hasWon = hasWon;
-	}
-
-	//accessor for name
-	public String getName()
-	{
-		return this.name;
-	}
-	
-	//accessor for player's number
-	public int getNumber()
-	{
-		return this.number;
-	}
-	
-	//method to keep track of player's owned positions on the board
-	public void addPosition(String position)
+	public void addPosition(Point position)
 	{
 		playerPositions.add(position);
 	}
-	
-	//checks if player has won
-	public void gameOver()
-	{
-		if(this.hasWon == true)
-		{
-			System.out.println("Game Over!");
-			System.out.println("Player \"" + this.name + "\" has won!");
-		}
+	public int getNumber() {
+		return number;
 	}
+	public void setNumber(int number) {
+		this.number = number;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public boolean isHasWon() {
+		return hasWon;
+	}
+	public void setHasWon(boolean hasWon) {
+		this.hasWon = hasWon;
+	}
+	public String getGamePiece() {
+		return gamePiece;
+	}
+	public void setGamePiece(String gamePiece) {
+		this.gamePiece = gamePiece;
+	}
+	
+	
+
 	
 
 }

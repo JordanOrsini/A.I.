@@ -1,4 +1,5 @@
 package comp472.polarizedLadder;
+import java.awt.Point;
 import java.util.ArrayList;
 
 public class Grid 
@@ -188,13 +189,12 @@ public class Grid
 	}
 
 
-	void convertInput(String desiredPosition, Player play)
+	public Point convertInput(String desiredPosition, Player play)
 	{
 		int valueX = 0;
 		int valueY = 0;
 		
 		availablePositions.remove(desiredPosition);
-		play.addPosition(desiredPosition);
 		
 		switch(desiredPosition.charAt(0))
 		{
@@ -303,8 +303,9 @@ public class Grid
 				break;
 			}
 		}
-		
+		Point point = new Point(valueX, valueY);
 		modifyGrid(valueX, valueY, play);
+		return point;
 	}
 	
 	void modifyGrid(int x, int y, Player play)
