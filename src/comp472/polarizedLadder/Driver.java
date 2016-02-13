@@ -10,11 +10,10 @@ public class Driver
 		Scanner positionScanner = new Scanner (System.in);
 		
 		String positionInput;
+		PlayGame game;
+		Player[] players = new Player[2];
 		
 		int gameMode;
-		Player p1;
-		Player p2;
-		Player[] myPlayers = new Player[2];
 		
 		System.out.println("Welcome to our COMP 472 project!");
 		System.out.println("--------------------------------");
@@ -40,37 +39,23 @@ public class Driver
 		System.out.println();
 		
 		//switch statement on user input for game mode
+		
 		switch(gameMode)
 		{
 			case 1:
 			{
 				System.out.println("You have selected Human vs. Human!");
 				System.out.println();
-				
-				System.out.print("Please enter name for player 1: ");
-				p1 = new Player(userName.nextLine(), 0);
-				System.out.println();
-				System.out.println("Player 1 created...");
-				System.out.println();
-				
-				System.out.print("Please enter name for player 2: ");
-				p2 = new Player(userName.nextLine(), 1);
-				System.out.println();
-				System.out.println("Player 2 created...");
-				System.out.println();
-				
-				System.out.println("Game start!");
-				System.out.println();
-				
-				myPlayers[0] = p1;
-				myPlayers[1] = p2;
-				
+				players[0] = new HumanPlayer();
+				players[1] = new HumanPlayer();
 				break;
 			}
 			case 2:
 			{
 				System.out.println("You have selected Human vs. A.I.!");
 				System.out.println();
+				players[0] = new HumanPlayer();
+				players[1] = new AIPlayer();
 				break;
 			}
 			default:
@@ -80,6 +65,8 @@ public class Driver
 				break;
 			}
 		}
+		game = new PlayGame(players);
+		
 		//initializes game grid
 		Grid myGrid = new Grid();
 		
@@ -91,8 +78,8 @@ public class Driver
 		{
 			for (int i = 0; i< 2; i++)
 			{
-				myPlayers[i].gameOver();
-				System.out.println("Player \"" + myPlayers[i].getName() + "\",");
+				players[i].gameOver();
+				System.out.println("Player \"" + players[i].getName() + "\",");
 				System.out.println("Please input a position to take on the board: (ex: 3D) ");
 				positionInput = positionScanner.nextLine();
 				
@@ -102,7 +89,7 @@ public class Driver
 					positionInput = positionScanner.nextLine();
 				}
 				
-				myGrid.convertInput(positionInput, myPlayers[i]);
+//				myGrid.convertInput(positionInput, players[i]);
 			}
 		}
 	}

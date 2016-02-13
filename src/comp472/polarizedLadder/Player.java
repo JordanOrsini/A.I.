@@ -1,10 +1,15 @@
 package comp472.polarizedLadder;
 
-public class Player 
-{
+public class Player {
+	
 	private int number;
 	private String name;
 	private boolean hasWon = false;
+	
+	//empty constructor
+	public Player()
+	{
+	}
 	
 	//parametrized constructor
 	public Player(String name, int number)
@@ -13,6 +18,18 @@ public class Player
 		this.name = name;
 	}
 	
+	public void setNumber(int number) {
+		this.number = number;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setHasWon(boolean hasWon) {
+		this.hasWon = hasWon;
+	}
+
 	//accessor for name
 	public String getName()
 	{
@@ -41,5 +58,5 @@ public class Player
 		}
 	}
 	
-	
+
 }
