@@ -2,12 +2,14 @@ package comp472.polarizedLadder;
 
 public class Player 
 {
+	private int number;
 	private String name;
 	private boolean hasWon = false;
 	
 	//parametrized constructor
-	public Player(String name)
+	public Player(String name, int number)
 	{
+		this.number = number;
 		this.name = name;
 	}
 	
@@ -15,6 +17,12 @@ public class Player
 	public String getName()
 	{
 		return this.name;
+	}
+	
+	//accessor for player's number
+	public int getNumber()
+	{
+		return this.number;
 	}
 	
 	//method to keep track of player's owned positions on the board

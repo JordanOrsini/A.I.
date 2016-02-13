@@ -147,6 +147,20 @@ public class Grid
 		gameGrid[7][13] = "M";	
 	}
 	
+	void modifyGrid(int x, int y, Player play)
+	{
+		if(play.getNumber() == 0)
+		{
+			gameGrid[x][y] = "\u25CF";
+			play.addPosition(x, y);
+		}
+		else
+		{
+			gameGrid[x][y] = "\u25CB";
+			play.addPosition(x, y);
+		}
+	}
+	
 	//prints the current state of the game grid to console
 	void printGrid()
 	{

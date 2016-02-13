@@ -45,13 +45,13 @@ public class Driver
 				System.out.println();
 				
 				System.out.print("Please enter name for player 1: ");
-				p1 = new Player(userName.nextLine());
+				p1 = new Player(userName.nextLine(), 0);
 				System.out.println();
 				System.out.println("Player 1 created...");
 				System.out.println();
 				
 				System.out.print("Please enter name for player 2: ");
-				p2 = new Player(userName.nextLine());
+				p2 = new Player(userName.nextLine(), 1);
 				System.out.println();
 				System.out.println("Player 2 created...");
 				System.out.println();
@@ -91,6 +91,8 @@ public class Driver
 				myPlayers[i].gameOver();
 				System.out.println("Player \"" + myPlayers[i].getName() + "\",");
 				System.out.println("Please input a position to take on the board: ");
+				myGrid.modifyGrid(5,5, myPlayers[i]);
+				myGrid.printGrid();
 			}
 		}
 	}
