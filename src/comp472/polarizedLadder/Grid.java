@@ -206,7 +206,7 @@ public class Grid
 		int valueX = 0;
 		int valueY = 0;
 		
-		availablePositions.remove("desiredPosition");
+		availablePositions.remove(desiredPosition);
 		play.addPosition(desiredPosition);
 		
 		switch(desiredPosition.charAt(0))
