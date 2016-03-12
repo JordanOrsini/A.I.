@@ -67,6 +67,10 @@ public class PlayGame {
 				players[i].addPosition(inputPoint);
 				
 				WinPattern.checkLadder(inputPoint, players, i, myGrid);
+				if(myGrid.getAvailablePositions().size()==0){
+					System.out.println("NO MORE AVAILABLE POSITIONS, TIE GAME!");
+					System.exit(0);
+				}
 			}
 		}
 	}
