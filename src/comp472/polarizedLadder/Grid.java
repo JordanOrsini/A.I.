@@ -312,7 +312,7 @@ public class Grid
 				break;
 			}
 		}
-		Point point = new Point(valueX, valueY);
+		Point point = new Point(valueY, valueX);
 		modifyGrid(valueX, valueY, play);
 		return point;
 	}
