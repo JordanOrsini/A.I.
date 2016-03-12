@@ -26,7 +26,9 @@ public class PlayGame {
 	public PlayGame(Player[] players) {
 		this.players = players;
 		
-		infoInitializer();
+		for(int i = 0; i < players.length; i++){
+			infoInitializer(players[i], i);
+		}		
 		
 		System.out.println("Game start!");
 		System.out.println();
@@ -36,32 +38,17 @@ public class PlayGame {
 		gameStart();
 	}
 	
-	private void infoInitializer(){
-		for(int i = 0; i < players.length; i++){
-			if(players[i].getClass().equals(HumanPlayer.class))
-				humanInfo(players[i], i);
-			else
-				compInfo(players[i], i);
-			
-			players[i].setGamePiece(gamePieces[i]);
+	private void infoInitializer(Player player, int i){
+		if(player.getClass() == HumanPlayer.class){
+			System.out.print("Please enter name for player " + (i+1) +": ");
+			player.setName(userName.nextLine());
 		}
-	}
-	
-	private void humanInfo(Player player, int i){
-		System.out.print("Please enter name for player " + (i+1) +": ");
-		player.setName(userName.nextLine());
+		else{
+			player.setName("AI");
+		}
 		player.setNumber(i);
-		if(i==0){player.setGamePiece("\u25CF");}
-		else if(i==1){player.setGamePiece("\u25CB");}
-		
-		System.out.println("\nHuman Player "+player.getName()+" created: "+player.getGamePiece()+"\n");
-	}
-	
-	private void compInfo(Player player, int i){
-		
-		player.setName("AI");
-		player.setNumber(i);
-		System.out.println("\nAI Player created...\n");
+		player.setGamePiece(gamePieces[i]);
+		System.out.println("\nAI Player created: "+player.getGamePiece()+"\n");
 	}
 	
 	private void gameStart(){
