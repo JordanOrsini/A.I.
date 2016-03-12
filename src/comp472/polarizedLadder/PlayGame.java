@@ -67,7 +67,7 @@ public class PlayGame {
 				players[i].addPosition(inputPoint);
 				
 				WinPattern.checkLadder(inputPoint, players[i]);
-				WinPattern.checkLadderNew(players[i]);
+//				WinPattern.checkLadderNew(players[i]);
 
 			}
 		}
