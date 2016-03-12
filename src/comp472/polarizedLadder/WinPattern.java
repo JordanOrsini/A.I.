@@ -22,9 +22,10 @@ public interface WinPattern {
 		for (int i = 0; i < winPatterns.length; i++){
 			int ladderPoints = 0;
 			for (int j = 0; j < winPatterns[i].length; j++){
-				int x = currentPosition.x - winPatterns[i][j].x;
-				int y = currentPosition.y + winPatterns[i][j].y;	
+				int x = currentPosition.x + winPatterns[i][j].x;
+				int y = currentPosition.y - winPatterns[i][j].y;	
 				Point check = new Point(x, y);
+				System.out.print(check+",");
 
 				if(player.getPlayerPositions().contains(check)){
 					ladderPoints += 1;
