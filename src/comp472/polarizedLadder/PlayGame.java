@@ -63,10 +63,12 @@ public class PlayGame {
 					positionInput = positionScanner.nextLine();
 				}
 						
-				Point inputPoint = myGrid.convertInput(positionInput, players[i]);
+				Point inputPoint = myGrid.removeAndConvertInput(positionInput, players[i]);
 				players[i].addPosition(inputPoint);
 				
 				WinPattern.checkLadder(inputPoint, players[i]);
+				WinPattern.checkLadderNew(players[i]);
+
 			}
 		}
 	}

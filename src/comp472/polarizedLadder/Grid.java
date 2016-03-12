@@ -198,7 +198,7 @@ public class Grid
 	}
 
 
-	public Point convertInput(String desiredPosition, Player play)
+	public Point removeAndConvertInput(String desiredPosition, Player play)
 	{
 		int valueX = 0;
 		int valueY = 0;
