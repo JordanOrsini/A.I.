@@ -6,7 +6,7 @@ public class Grid
 {
 	private ArrayList<String> availablePositions;
 	final int GRID_ROWS = 8;
-	final int GRID_COLUMNS  = 14;
+	final int GRID_COLUMNS  = 15;
 	private String[][] gameGrid;
 	
 	//default constructor
@@ -29,6 +29,7 @@ public class Grid
 		gameGrid[0][11] = " ";
 		gameGrid[0][12] = " ";
 		gameGrid[0][13] = " ";
+		gameGrid[0][14] = "7";
 		
 		gameGrid[1][0] = "6";
 		gameGrid[1][1] = " ";
@@ -44,6 +45,7 @@ public class Grid
 		gameGrid[1][11] = " ";
 		gameGrid[1][12] = " ";
 		gameGrid[1][13] = " ";
+		gameGrid[1][14] = "6";
 		
 		gameGrid[2][0] = "5";
 		gameGrid[2][1] = " ";
@@ -59,7 +61,8 @@ public class Grid
 		gameGrid[2][11] = " ";
 		gameGrid[2][12] = " ";
 		gameGrid[2][13] = " ";
-		
+		gameGrid[2][14] = "5";
+
 		gameGrid[3][0] = "4";
 		gameGrid[3][1] = " ";
 		gameGrid[3][2] = " ";
@@ -74,7 +77,8 @@ public class Grid
 		gameGrid[3][11] = " ";
 		gameGrid[3][12] = " ";
 		gameGrid[3][13] = " ";
-		
+		gameGrid[3][14] = "4";
+
 		gameGrid[4][0] = "3";
 		gameGrid[4][1] = " ";
 		gameGrid[4][2] = " ";
@@ -89,7 +93,8 @@ public class Grid
 		gameGrid[4][11] = "*";
 		gameGrid[4][12] = " ";
 		gameGrid[4][13] = " ";
-		
+		gameGrid[4][14] = "3";
+
 		gameGrid[5][0] = "2";
 		gameGrid[5][1] = " ";
 		gameGrid[5][2] = "*";
@@ -104,7 +109,8 @@ public class Grid
 		gameGrid[5][11] = "*";
 		gameGrid[5][12] = "*";
 		gameGrid[5][13] = " ";
-		
+		gameGrid[5][14] = "2";
+
 		gameGrid[6][0] = "1";
 		gameGrid[6][1] = "*";
 		gameGrid[6][2] = "*";
@@ -119,7 +125,8 @@ public class Grid
 		gameGrid[6][11] = "*";
 		gameGrid[6][12] = "*";
 		gameGrid[6][13] = "*";
-		
+		gameGrid[6][14] = "1";
+
 		gameGrid[7][0] = " ";
 		gameGrid[7][1] = "A";
 		gameGrid[7][2] = "B";
@@ -134,6 +141,8 @@ public class Grid
 		gameGrid[7][11] = "K";
 		gameGrid[7][12] = "L";
 		gameGrid[7][13] = "M";	
+		gameGrid[7][14] = " ";
+
 	
 		availablePositions = new ArrayList<String>();
 		
@@ -326,7 +335,7 @@ public class Grid
 	{
 		for (int i=0; i<8; i++)
 		{
-			for (int j=0; j<14; j++)
+			for (int j=0; j<15; j++)
 			{
 				System.out.print(gameGrid[i][j] + " ");
 			}
