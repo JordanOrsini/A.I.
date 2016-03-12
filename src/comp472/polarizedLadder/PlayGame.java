@@ -39,7 +39,7 @@ public class PlayGame {
 	}
 	
 	private void infoInitializer(Player player, int i){
-		if(player.getClass() == HumanPlayer.class){
+		if(player.getClass().equals(HumanPlayer.class)){
 			System.out.print("Please enter name for player " + (i+1) +": ");
 			player.setName(userName.nextLine());
 		}
@@ -48,13 +48,13 @@ public class PlayGame {
 		}
 		player.setNumber(i);
 		player.setGamePiece(gamePieces[i]);
-		System.out.println("\nAI Player created: "+player.getGamePiece()+"\n");
+		System.out.println("\nPlayer "+player.getName()+" created: "+player.getGamePiece()+"\n");
 	}
 	
 	private void gameStart(){
 		while(!gameOver){
 			for (int i = 0; i< 2; i++){
-				System.out.println("Player \"" + players[i].getName() + "\",");
+				System.out.println("Player " + players[i].getName() + "'s turn: "+players[i].getGamePiece());
 				System.out.println("Please input a position to take on the board: (ex: 3D) ");
 				positionInput = positionScanner.nextLine();
 				
