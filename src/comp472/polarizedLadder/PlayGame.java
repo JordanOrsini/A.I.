@@ -51,7 +51,10 @@ public class PlayGame {
 		System.out.print("Please enter name for player " + (i+1) +": ");
 		player.setName(userName.nextLine());
 		player.setNumber(i);
-		System.out.println("\nHuman Player "+player.getName()+" created...\n");
+		if(i==0){player.setGamePiece("\u25CF");}
+		else if(i==1){player.setGamePiece("\u25CB");}
+		
+		System.out.println("\nHuman Player "+player.getName()+" created: "+player.getGamePiece()+"\n");
 	}
 	
 	private void compInfo(Player player, int i){

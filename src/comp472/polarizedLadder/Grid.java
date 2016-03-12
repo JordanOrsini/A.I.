@@ -319,14 +319,7 @@ public class Grid
 	
 	void modifyGrid(int x, int y, Player play)
 	{
-		if(play.getNumber() == 0)
-		{
-			gameGrid[x][y] = "\u25CF";
-		}
-		else
-		{
-			gameGrid[x][y] = "\u25CB";
-		}
+		gameGrid[x][y] = play.getGamePiece();
 		printGrid();
 	}
 	
