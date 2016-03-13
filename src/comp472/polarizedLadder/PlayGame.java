@@ -19,7 +19,7 @@ public class PlayGame {
 
 	Player[] players;
 
-	Grid myGrid = new Grid();
+	Grid gameGrid = new Grid();
 
 	Boolean gameOver = false;
 
@@ -33,7 +33,7 @@ public class PlayGame {
 		System.out.println("Game start!");
 		System.out.println();
 
-		myGrid.printGrid();
+		gameGrid.printGrid();
 
 		gameStart();
 	}
@@ -56,18 +56,18 @@ public class PlayGame {
 			for (int i = 0; i< 2; i++){
 				System.out.println("Player " + players[i].getName() + "'s turn: "+players[i].getGamePiece());
 				System.out.println("Please input a position to take on the board: (ex: 3D) ");
-				Point inputPoint = myGrid.convertInput(positionScanner.nextLine());
+				Point inputPoint = gameGrid.convertInput(positionScanner.nextLine());
 				
-				while(!myGrid.getAvailablePoints().contains(inputPoint)){
+				while(!gameGrid.getAvailablePoints().contains(inputPoint)){
 					System.out.println("Invalid input! Please try again: (ex: 5E) ");
-					inputPoint = myGrid.convertInput(positionScanner.nextLine());
+					inputPoint = gameGrid.convertInput(positionScanner.nextLine());
 				}
 				
-				myGrid.setPoint(inputPoint, players[i].getGamePiece());
+				gameGrid.setPoint(inputPoint, players[i].getGamePiece());
 				players[i].addPosition(inputPoint);
 				
-				WinPattern.checkLadder(inputPoint, players, i, myGrid);
-				if(myGrid.getAvailablePoints().size()==0){
+				WinPatternChecker.checkForLadder(inputPoint, players, i, gameGrid);
+				if(gameGrid.getAvailablePoints().size()==0){
 					System.out.println("NO MORE AVAILABLE POSITIONS, TIE GAME!");
 					System.exit(0);
 				}
@@ -75,39 +75,16 @@ public class PlayGame {
 		}
 	}
 
-	public int returnMin(List<Integer> list) {
-		int min = Integer.MAX_VALUE;
-		int index = -1;
-		for (int i = 0; i < list.size(); ++i) {
-			if (list.get(i) < min) {
-				min = list.get(i);
-				index = i;
-			}
-		}
-		return list.get(index);
-	}
-
-	public int returnMax(List<Integer> list) {
-		int max = Integer.MIN_VALUE;
-		int index = -1;
-		for (int i = 0; i < list.size(); ++i) {
-			if (list.get(i) > max) {
-				max = list.get(i);
-				index = i;
-			}
-		}
-		return list.get(index);
-	}
-
-	Point computersMove; 
+	Point oppositePlayerMove; 
+	
 	public int minimax(int depth, String playerToken) {
 		String oppositePlayerToken;
-		Point inputPoint = myGrid.convertInput(positionInput);
+		Point inputPoint = gameGrid.convertInput(positionInput);
 		
 //		if (blackWins() return +1;
 //		if (whiteWins() return -1;
 
-		List<Point> pointsAvailable = myGrid.getAvailablePoints();
+		List<Point> pointsAvailable = gameGrid.getAvailablePoints();
 		if (pointsAvailable.isEmpty()) return 0; 
 
 		int min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;
@@ -117,7 +94,7 @@ public class PlayGame {
 			//Black player returns MAX
 			if (playerToken.equals("\u25CF")) {
 				oppositePlayerToken = "\u25CB";
-				myGrid.setPoint(inputPoint, playerToken);
+				gameGrid.setPoint(inputPoint, playerToken);
 				int currentScore = minimax(depth + 1, oppositePlayerToken);
 				max = Math.max(currentScore, max);
 
@@ -126,28 +103,28 @@ public class PlayGame {
 				}
 				if(currentScore >= 0){
 					if(depth == 0){
-						computersMove = point;
+						oppositePlayerMove = point;
 					}
 				}
 				if(currentScore == 1){
-					myGrid.resetPoint(inputPoint);
+					gameGrid.resetPoint(inputPoint);
 					break;
 				} 
 				if(i == pointsAvailable.size()-1 && max < 0){
 					if(depth == 0){
-						computersMove = point;
+						oppositePlayerMove = point;
 					}
 				}
 
 			//White player returns MIN
 			} else if (playerToken.equals("\u25CB")) {
 				oppositePlayerToken = "\u25CF";
-				myGrid.setPoint(inputPoint, playerToken);
+				gameGrid.setPoint(inputPoint, playerToken);
 	            int currentScore = minimax(depth + 1, oppositePlayerToken);
 	            min = Math.min(currentScore, min); 
-	            if(min == -1){myGrid.resetPoint(inputPoint); break;}
+	            if(min == -1){gameGrid.resetPoint(inputPoint); break;}
 	        }
-				myGrid.resetPoint(inputPoint);
+				gameGrid.resetPoint(inputPoint);
 		}
 		return playerToken.equals("\u25CF") ? max : min;
 	}

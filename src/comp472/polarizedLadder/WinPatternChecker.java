@@ -3,28 +3,37 @@ package comp472.polarizedLadder;
 import java.awt.Point;
 import java.util.ArrayList;
 
-public interface WinPattern {
+public interface WinPatternChecker {
 	
-	Point winPatterns[][] = { 			
+	Point patterns[][] = { 			
+		//PATTERN 1
 		{new Point(0,0), new Point(1,0), new Point (1,1), new Point (2,1) , new Point (2,2)},
-		{new Point(-1,0), new Point(0,0), new Point (0,1), new Point (1,1) , new Point (1,2)},
-		{new Point (-1,-1), new Point (0,-1), new Point(0,0), new Point(1,0), new Point (1,1)},
-		{new Point (-2,-1), new Point (-1,-1), new Point (-1,0), new Point(0,0), new Point(0,1)},
-		{new Point (-2,-2), new Point (-1,-2), new Point (-1,-1), new Point(0,-1), new Point(0,0)},
 		{new Point(0,0), new Point(-1,0), new Point (-1,1), new Point (-2,1) , new Point (-2,2)},
+		
+		//PATTERN 2
 		{new Point(1,0), new Point(0,0), new Point (0,1), new Point (-1,1) , new Point (-1,2)},
+		{new Point(-1,0), new Point(0,0), new Point (0,1), new Point (1,1) , new Point (1,2)},
+		
+		//PATTERN 3
 		{new Point (1,-1), new Point (0,-1), new Point(0,0), new Point(-1,0), new Point (-1,1)},
+		{new Point (-1,-1), new Point (0,-1), new Point(0,0), new Point(1,0), new Point (1,1)},
+		
+		//PATTERN 4
 		{new Point (2,-1), new Point (1,-1), new Point (1,0), new Point(0,0), new Point(0,1)},
+		{new Point (-2,-1), new Point (-1,-1), new Point (-1,0), new Point(0,0), new Point(0,1)},
+		
+		//PATTERN 5
 		{new Point (2,-2),  new Point (1,-2), new Point (1,-1), new Point(0,-1), new Point(0,0)},
+		{new Point (-2,-2), new Point (-1,-2), new Point (-1,-1), new Point(0,-1), new Point(0,0)}
 	};
 	
-	public static void checkLadder(Point currentPosition, Player players[], int playerNumber, Grid grid){
+	public static void checkForLadder(Point currentPosition, Player players[], int playerNumber, Grid grid){
 		System.out.println(players[playerNumber].getPlayerPositions());
-		for (int i = 0; i < winPatterns.length; i++){
+		for (int i = 0; i < patterns.length; i++){
 			ArrayList<Point> winningArray = new ArrayList<Point>();
-			for (int j = 0; j < winPatterns[i].length; j++){
-				int x = currentPosition.x + winPatterns[i][j].x;
-				int y = currentPosition.y - winPatterns[i][j].y;	
+			for (int j = 0; j < patterns[i].length; j++){
+				int x = currentPosition.x + patterns[i][j].x;
+				int y = currentPosition.y - patterns[i][j].y;	
 				Point check = new Point(x, y);
 
 				if(players[playerNumber].getPlayerPositions().contains(check)){
