@@ -12,7 +12,6 @@ public class Grid
 	//default constructor
 	public Grid()
 	{
-
 		gameGrid = new String[GRID_ROWS][GRID_COLUMNS];
 		
 		gameGrid[0][0] = "7";
