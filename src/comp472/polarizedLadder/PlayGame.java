@@ -23,7 +23,6 @@ public class PlayGame {
 
 	Boolean gameOver = false;
 
-
 	public PlayGame(Player[] players) {
 		this.players = players;
 
