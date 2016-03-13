@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Grid 
 {
-	private ArrayList<String> availablePositions;
+	private ArrayList<Point> availablePoints;
 	final int GRID_ROWS = 8;
 	final int GRID_COLUMNS  = 15;
 	private String[][] gameGrid;
@@ -144,102 +144,102 @@ public class Grid
 		gameGrid[7][14] = " ";
 
 	
-		availablePositions = new ArrayList<String>();
+		availablePoints = new ArrayList<Point>();
 		
-		availablePositions.add("1A");
-		availablePositions.add("2B");
-		availablePositions.add("1B");
-		availablePositions.add("3C");
-		availablePositions.add("2C");
-		availablePositions.add("1C");
-		availablePositions.add("4D");
-		availablePositions.add("3D");
-		availablePositions.add("2D");
-		availablePositions.add("1D");
-		availablePositions.add("5E");
-		availablePositions.add("4E");
-		availablePositions.add("3E");
-		availablePositions.add("2E");
-		availablePositions.add("1E");
-		availablePositions.add("6F");
-		availablePositions.add("5F");
-		availablePositions.add("4F");
-		availablePositions.add("3F");
-		availablePositions.add("2F");
-		availablePositions.add("1F");
-		availablePositions.add("7G");
-		availablePositions.add("6G");
-		availablePositions.add("5G");
-		availablePositions.add("4G");
-		availablePositions.add("3G");
-		availablePositions.add("2G");
-		availablePositions.add("1G");
-		availablePositions.add("6H");
-		availablePositions.add("5H");
-		availablePositions.add("4H");
-		availablePositions.add("3H");
-		availablePositions.add("2H");
-		availablePositions.add("1H");
-		availablePositions.add("5I");
-		availablePositions.add("4I");
-		availablePositions.add("3I");
-		availablePositions.add("2I");
-		availablePositions.add("1I");
-		availablePositions.add("4J");
-		availablePositions.add("3J");
-		availablePositions.add("2J");
-		availablePositions.add("1J");
-		availablePositions.add("3K");
-		availablePositions.add("2K");
-		availablePositions.add("1K");
-		availablePositions.add("2L");
-		availablePositions.add("1L");
-		availablePositions.add("1M");
+		availablePoints.add(new Point(1,6));
+		availablePoints.add(new Point(2,5));
+		availablePoints.add(new Point(2,6));
+		availablePoints.add(new Point(3,4));
+		availablePoints.add(new Point(3,6));
+		availablePoints.add(new Point(3,6));
+		availablePoints.add(new Point(4,3));
+		availablePoints.add(new Point(4,4));
+		availablePoints.add(new Point(4,5));
+		availablePoints.add(new Point(4,6));
+		availablePoints.add(new Point(5,2));
+		availablePoints.add(new Point(5,3));
+		availablePoints.add(new Point(5,4));
+		availablePoints.add(new Point(5,5));
+		availablePoints.add(new Point(5,6));
+		availablePoints.add(new Point(6,1));
+		availablePoints.add(new Point(6,2));
+		availablePoints.add(new Point(6,3));
+		availablePoints.add(new Point(6,4));
+		availablePoints.add(new Point(6,5));
+		availablePoints.add(new Point(6,6));
+		availablePoints.add(new Point(7,0));
+		availablePoints.add(new Point(7,1));
+		availablePoints.add(new Point(7,2));
+		availablePoints.add(new Point(7,3));
+		availablePoints.add(new Point(7,4));
+		availablePoints.add(new Point(7,5));
+		availablePoints.add(new Point(7,6));
+		availablePoints.add(new Point(8,1));
+		availablePoints.add(new Point(8,2));
+		availablePoints.add(new Point(8,3));
+		availablePoints.add(new Point(8,4));
+		availablePoints.add(new Point(8,5));
+		availablePoints.add(new Point(8,6));
+		availablePoints.add(new Point(9,2));
+		availablePoints.add(new Point(9,3));
+		availablePoints.add(new Point(9,4));
+		availablePoints.add(new Point(9,5));
+		availablePoints.add(new Point(9,6));
+		availablePoints.add(new Point(10,3));
+		availablePoints.add(new Point(10,4));
+		availablePoints.add(new Point(10,5));
+		availablePoints.add(new Point(10,6));
+		availablePoints.add(new Point(11,4));
+		availablePoints.add(new Point(11,5));
+		availablePoints.add(new Point(11,6));
+		availablePoints.add(new Point(12,5));
+		availablePoints.add(new Point(12,6));
+		availablePoints.add(new Point(13,6));
 	}
 
 
-	public Point removeAndConvertInput(String desiredPosition, Player play)
+	public Point convertInput(String desiredPosition)
 	{
 		int valueX = 0;
 		int valueY = 0;
 		
-		availablePositions.remove(desiredPosition);
+		//availablePositions.remove(desiredPosition);
 		
 		switch(desiredPosition.charAt(0))
 		{
 			case '1':
 			{
-				valueX = 6;
+				valueY = 6;
 				break;
 			}
 			case '2':
 			{
-				valueX = 5;
+				valueY = 5;
 				break;
 			}
 			case '3':
 			{
-				valueX = 4;
+				valueY = 4;
 				break;
 			}
 			case '4':
 			{
-				valueX = 3;
+				valueY = 3;
 				break;
 			}
 			case '5':
 			{
-				valueX = 2;
+				valueY = 2;
 				break;
 			}
 			case '6':
 			{
-				valueX = 1;
+				valueY = 1;
 				break;
 			}
 			case '7':
 			{
-				valueX = 0;
+				valueY = 0;
 				break;
 			}
 		}
@@ -248,78 +248,77 @@ public class Grid
 		{
 			case 'A':
 			{
-				valueY = 1;
+				valueX = 1;
 				break;
 			}
 			case 'B':
 			{
-				valueY = 2;
+				valueX = 2;
 				break;
 			}
 			case 'C':
 			{
-				valueY = 3;
+				valueX = 3;
 				break;
 			}
 			case 'D':
 			{
-				valueY = 4;
+				valueX = 4;
 				break;
 			}
 			case 'E':
 			{
-				valueY = 5;
+				valueX = 5;
 				break;
 			}
 			case 'F':
 			{
-				valueY = 6;
+				valueX = 6;
 				break;
 			}
 			case 'G':
 			{
-				valueY = 7;
+				valueX = 7;
 				break;
 			}
 			case 'H':
 			{
-				valueY = 8;
+				valueX = 8;
 				break;
 			}
 			case 'I':
 			{
-				valueY = 9;
+				valueX = 9;
 				break;
 			}
 			case 'J':
 			{
-				valueY = 10;
+				valueX = 10;
 				break;
 			}
 			case 'K':
 			{
-				valueY = 11;
+				valueX = 11;
 				break;
 			}
 			case 'L':
 			{
-				valueY = 12;
+				valueX = 12;
 				break;
 			}
 			case 'M':
 			{
-				valueY = 13;
+				valueX = 13;
 				break;
 			}
 		}
-		Point point = new Point(valueY, valueX);
-		modifyGrid(valueX, valueY, play);
-		return point;
+		 
+		return new Point(valueX, valueY);
 	}
 	
-	void modifyGrid(int x, int y, Player play)
+	void modifyGrid(Point point, String playerToken)
 	{
-		gameGrid[x][y] = play.getGamePiece();
+		gameGrid[point.y][point.x] = playerToken;
 		printGrid();
 	}
 	
@@ -337,12 +336,24 @@ public class Grid
 		System.out.println();
 	}
 	
-	ArrayList<String> getAvailablePositions()
+	public ArrayList<Point> getAvailablePoints()
 	{
-		return this.availablePositions;
+		return this.availablePoints;
 	}
 	
 	public String[][] getGameGrid() {
 		return gameGrid;
+	}
+	
+	public void setPoint(Point point, String playerToken)
+	{
+		modifyGrid(point, playerToken);
+		availablePoints.remove(point);	
+	}
+	
+	public void resetPoint (Point point)
+	{
+		modifyGrid(point, "*");
+		availablePoints.add(point);
 	}
 }
