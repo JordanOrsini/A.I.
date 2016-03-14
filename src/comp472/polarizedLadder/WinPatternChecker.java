@@ -48,22 +48,28 @@ public interface WinPatternChecker {
 	//method checks for a winning pattern by cross referencing player's owned positions
 	//with patterns[][] 2D array. will add values in patterns[][] to player's owned points
 	//in order for the win pattern to be detected across the whole gameGrid
-	public static void checkForLadder(Point currentPosition, Player players[], int playerNumber, Grid grid){
-		System.out.println(players[playerNumber].getPlayerPositions());
-		for (int i = 0; i < patterns.length; i++){
+	public static void checkForLadder(Point currentPosition, Player players[], int playerNumber, Grid grid)
+	{
+		
+		for (int i = 0; i < patterns.length; i++)
+		{
 			ArrayList<Point> winningArray = new ArrayList<Point>();
-			for (int j = 0; j < patterns[i].length; j++){
+			for (int j = 0; j < patterns[i].length; j++)
+			{
 				int x = currentPosition.x + patterns[i][j].x;
 				int y = currentPosition.y - patterns[i][j].y;	
 				Point check = new Point(x, y);
 
-				if(players[playerNumber].getPlayerPositions().contains(check)){
+				if(players[playerNumber].getPlayerPositions().contains(check))
+				{
 					winningArray.add(check);
-					if(winningArray.size() == 5){
+					if(winningArray.size() == 5)
+					{
 						
 						//makes sure the winning pattern is not blocked by the other player before declaring a winner
-						if(!checkBlocked(winningArray.get(2), i, players, playerNumber, grid)){
-							System.out.println("\n\nPlayer \""+players[playerNumber].getName()+"\" WINS!");
+						if(!checkBlocked(winningArray.get(2), i, players, playerNumber, grid))
+						{
+							System.out.print("Player \""+players[playerNumber].getName()+"\" WINS!");
 							System.exit(0);
 						}
 					}

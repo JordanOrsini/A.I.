@@ -93,7 +93,7 @@ public class PlayGame {
 				//if there are no more available positions to take and no one has won yet, declare the game a tie game
 				if(gameGrid.getAvailablePoints().size()==0)
 				{
-					System.out.println("\n\nNO MORE AVAILABLE POSITIONS, TIE GAME!");
+					System.out.print("NO MORE AVAILABLE POSITIONS, TIE GAME!");
 					System.exit(0);
 				}
 			}

@@ -214,118 +214,129 @@ public class Grid
 		int valueX = 0;
 		int valueY = 0;
 		
-		//switch on first user inputed character to get Y value of point
-		switch(desiredPosition.charAt(0))
+		//if string is less than 2 characters in length return an invalid value
+		if(desiredPosition.length() < 2)
 		{
-			case '1':
-			{
-				valueY = 6;
-				break;
-			}
-			case '2':
-			{
-				valueY = 5;
-				break;
-			}
-			case '3':
-			{
-				valueY = 4;
-				break;
-			}
-			case '4':
-			{
-				valueY = 3;
-				break;
-			}
-			case '5':
-			{
-				valueY = 2;
-				break;
-			}
-			case '6':
-			{
-				valueY = 1;
-				break;
-			}
-			case '7':
-			{
-				valueY = 0;
-				break;
-			}
+			valueX = -1;
+			valueY = -1;
+			return new Point(valueX, valueY);
 		}
-		
-		//switch on second character of user input to get X value of point
-		switch(desiredPosition.charAt(1))
+		//if string is at least 2 characters in length, convert the input to x and y values and return a point
+		else
 		{
-			case 'A':
+			//switch on first user inputed character to get Y value of point
+			switch(desiredPosition.charAt(0))
 			{
-				valueX = 1;
-				break;
+				case '1':
+				{
+					valueY = 6;
+					break;
+				}
+				case '2':
+				{
+					valueY = 5;
+					break;
+				}
+				case '3':
+				{
+					valueY = 4;
+					break;
+				}
+				case '4':
+				{
+					valueY = 3;
+					break;
+				}
+				case '5':
+				{
+					valueY = 2;
+					break;
+				}
+				case '6':
+				{
+					valueY = 1;
+					break;
+				}
+				case '7':
+				{
+					valueY = 0;
+					break;
+				}
 			}
-			case 'B':
-			{
-				valueX = 2;
-				break;
-			}
-			case 'C':
-			{
-				valueX = 3;
-				break;
-			}
-			case 'D':
-			{
-				valueX = 4;
-				break;
-			}
-			case 'E':
-			{
-				valueX = 5;
-				break;
-			}
-			case 'F':
-			{
-				valueX = 6;
-				break;
-			}
-			case 'G':
-			{
-				valueX = 7;
-				break;
-			}
-			case 'H':
-			{
-				valueX = 8;
-				break;
-			}
-			case 'I':
-			{
-				valueX = 9;
-				break;
-			}
-			case 'J':
-			{
-				valueX = 10;
-				break;
-			}
-			case 'K':
-			{
-				valueX = 11;
-				break;
-			}
-			case 'L':
-			{
-				valueX = 12;
-				break;
-			}
-			case 'M':
-			{
-				valueX = 13;
-				break;
-			}
-		}
 		
-		//returns point
-		return new Point(valueX, valueY);
+			//switch on second character of user input to get X value of point
+			switch(desiredPosition.charAt(1))
+			{
+				case 'A':
+				{
+					valueX = 1;
+					break;
+				}
+				case 'B':
+				{
+					valueX = 2;
+					break;
+				}
+				case 'C':
+				{
+					valueX = 3;
+					break;
+				}
+				case 'D':
+				{
+					valueX = 4;
+					break;
+				}
+				case 'E':
+				{
+					valueX = 5;
+					break;
+				}
+				case 'F':
+				{
+					valueX = 6;
+					break;
+				}
+				case 'G':
+				{
+					valueX = 7;
+					break;
+				}
+				case 'H':
+				{
+					valueX = 8;
+					break;
+				}
+				case 'I':
+				{
+					valueX = 9;
+					break;
+				}
+				case 'J':
+				{
+					valueX = 10;
+					break;
+				}
+				case 'K':
+				{
+					valueX = 11;
+					break;
+				}
+				case 'L':
+				{
+					valueX = 12;
+					break;
+				}
+				case 'M':
+				{
+					valueX = 13;
+					break;
+				}
+			}
+		
+			//returns point
+			return new Point(valueX, valueY);
+		}
 	}
 	
 	//method takes a point and the player's color and modifies the string in the gameGrid's indexes corresponding
