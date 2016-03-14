@@ -137,21 +137,21 @@ public class PlayGame {
 			{
 				oppositePlayerToken = "\u25CB";
 				gameGrid.setPoint(inputPoint, playerToken);
-				int currentScore = minimax(depth + 1, oppositePlayerToken);
-				max = Math.max(currentScore, max);
+				int result = minimax(depth + 1, oppositePlayerToken);
+				max = Math.max(result, max);
 
 				if(depth == 0)
 				{
-					System.out.println("Score for position "+(i+1)+" = "+currentScore);
+					System.out.println("Score for position "+(i+1)+" = "+result);
 				}
-				if(currentScore >= 0)
+				if(result >= 0)
 				{
 					if(depth == 0)
 					{
 						oppositePlayerMove = point;
 					}
 				}
-				if(currentScore == 1)
+				if(result == 1)
 				{
 					gameGrid.resetPoint(inputPoint);
 					break;
