@@ -115,39 +115,52 @@ public class PlayGame {
 		if (whiteWins()) return -1;
 
 		List<Point> pointsAvailable = gameGrid.getAvailablePoints();
-		if (pointsAvailable.isEmpty()) return 0; 
+		if (pointsAvailable.isEmpty()) 
+		{
+			return 0; 
+		}
 
 		int min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;
 
-		for (int i = 0; i < pointsAvailable.size(); ++i) {
+		for (int i = 0; i < pointsAvailable.size(); ++i)
+		{
 			Point point = pointsAvailable.get(i);  
+			
 			//Black player returns MAX
-			if (playerToken.equals("\u25CF")) {
+			if (playerToken.equals("\u25CF")) 
+			{
 				oppositePlayerToken = "\u25CB";
 				gameGrid.setPoint(inputPoint, playerToken);
 				int currentScore = minimax(depth + 1, oppositePlayerToken);
 				max = Math.max(currentScore, max);
 
-				if(depth == 0){
+				if(depth == 0)
+				{
 					System.out.println("Score for position "+(i+1)+" = "+currentScore);
 				}
-				if(currentScore >= 0){
-					if(depth == 0){
+				if(currentScore >= 0)
+				{
+					if(depth == 0)
+					{
 						oppositePlayerMove = point;
 					}
 				}
-				if(currentScore == 1){
+				if(currentScore == 1)
+				{
 					gameGrid.resetPoint(inputPoint);
 					break;
 				} 
-				if(i == pointsAvailable.size()-1 && max < 0){
-					if(depth == 0){
+				if(i == pointsAvailable.size()-1 && max < 0)
+				{
+					if(depth == 0)
+					{
 						oppositePlayerMove = point;
 					}
-				}
-
+				}		
+			} 
 			//White player returns MIN
-			} else if (playerToken.equals("\u25CB")) {
+			else if (playerToken.equals("\u25CB"))
+			{
 				oppositePlayerToken = "\u25CF";
 				gameGrid.setPoint(inputPoint, playerToken);
 	            int currentScore = minimax(depth + 1, oppositePlayerToken);
@@ -156,6 +169,7 @@ public class PlayGame {
 	        }
 				gameGrid.resetPoint(inputPoint);
 		}
+		
 		return playerToken.equals("\u25CF") ? max : min;
 	}
 	
