@@ -10,6 +10,8 @@ public class Grid
 	private String[][] gameGrid;
 	
 	//default constructor
+	//initializes grid 2d array
+	//initializes arrayList of available points
 	public Grid()
 	{
 		gameGrid = new String[GRID_ROWS][GRID_COLUMNS];
@@ -197,13 +199,14 @@ public class Grid
 	}
 
 
+	//method converts the user inputed string value and converts it to a point representing an index on the 2D
+	//array representing the game grid
 	public Point convertInput(String desiredPosition)
 	{
 		int valueX = 0;
 		int valueY = 0;
 		
-		//availablePositions.remove(desiredPosition);
-		
+		//switch on first user inputed character to get Y value of point
 		switch(desiredPosition.charAt(0))
 		{
 			case '1':
@@ -243,6 +246,7 @@ public class Grid
 			}
 		}
 		
+		//switch on second character of user input to get X value of point
 		switch(desiredPosition.charAt(1))
 		{
 			case 'A':
@@ -311,10 +315,14 @@ public class Grid
 				break;
 			}
 		}
-		 
+		
+		//returns point
 		return new Point(valueX, valueY);
 	}
 	
+	//method takes a point and the player's color and modifies the string in the gameGrid's indexes corresponding
+	//to the point's coordinates and replaces it with the player's token color
+	//will also print the grid
 	void modifyGrid(Point point, String playerToken)
 	{
 		gameGrid[point.y][point.x] = playerToken;
@@ -335,21 +343,27 @@ public class Grid
 		System.out.println();
 	}
 	
+	//accessor method for availablePoints
+	//returns arrayList of points representing all valid positions on the game grid not occupied by any player
 	public ArrayList<Point> getAvailablePoints()
 	{
 		return this.availablePoints;
 	}
 	
+	//accessor method for gameGrid
+	//returns 2D array representing the gameGrid
 	public String[][] getGameGrid() {
 		return gameGrid;
 	}
 	
+	//method takes a point and player color and will add the corresponding position on the grid to the player
 	public void setPoint(Point point, String playerToken)
 	{
 		modifyGrid(point, playerToken);
 		availablePoints.remove(point);	
 	}
 	
+	//removes possession of a point. will reset game grid value to default "*" at the given point
 	public void resetPoint (Point point)
 	{
 		modifyGrid(point, "*");
