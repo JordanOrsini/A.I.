@@ -5,6 +5,11 @@ import java.util.ArrayList;
 
 public interface WinPatternChecker {
 	
+	//represents general patterns that consist of a win
+	//these patterns will be added to player's owned positions to check if a winning pattern is present
+	//the (0,0) point represents the most current point the player has claimed
+	//as such we need a (0,0) in each of the 5 points required for a right ladder win
+	//or a left ladder win, resulting in 10 win patterns.
 	Point patterns[][] = 
 	{ 			
 		//(0,0) as first point in right and left ladder respectfully
@@ -32,6 +37,9 @@ public interface WinPatternChecker {
 		
 	};
 	
+	//method checks for a winning pattern by cross referencing player's owned positions
+	//with patterns[][] 2D array. will add values in patterns[][] to player's owned points
+	//in order for the win pattern to be detected across the whole gameGrid
 	public static void checkForLadder(Point currentPosition, Player players[], int playerNumber, Grid grid){
 		System.out.println(players[playerNumber].getPlayerPositions());
 		for (int i = 0; i < patterns.length; i++){
@@ -44,6 +52,8 @@ public interface WinPatternChecker {
 				if(players[playerNumber].getPlayerPositions().contains(check)){
 					winningArray.add(check);
 					if(winningArray.size() == 5){
+						
+						//makes sure the winning pattern is not blocked by the other player before declaring a winner
 						if(!checkBlocked(winningArray.get(2), i, players, playerNumber, grid)){
 							System.out.println("\n\nPlayer \""+players[playerNumber].getName()+"\" WINS!");
 							System.exit(0);
@@ -54,13 +64,17 @@ public interface WinPatternChecker {
 		}
 	}
 	
-
+	//method makes sure winning pattern is not blocked by other player by checking points
+	//diagonal to the middle point of the winning ladder
 	public static boolean checkBlocked(Point middlePoint, int winPatternNumber, Player players[], int playerNumber, Grid grid){
 		Point blockedRight, blockedLeft;
+		
+		//if winning pattern is one of the rightward ladders
 		if((winPatternNumber % 2) == 0){
 			blockedRight = new Point(middlePoint.x+1, middlePoint.y+1);
 			blockedLeft = new Point(middlePoint.x-1, middlePoint.y-1);
 		}
+		//if the winning pattern is one of the leftward ladders
 		else{
 			blockedRight = new Point(middlePoint.x+1, middlePoint.y-1);
 			blockedLeft = new Point(middlePoint.x-1, middlePoint.y+1);

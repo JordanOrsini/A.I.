@@ -52,22 +52,37 @@ public class PlayGame {
 	}
 
 	private void gameStart(){
+		
+		//game loop
 		while(!gameOver){
-			for (int i = 0; i< 2; i++){
+			
+			//alternates between player's contained in players[] array
+			//will as current player to input a position he would like to claim
+			for (int i = 0; i< 2; i++)
+			{
 				System.out.println("Player " + players[i].getName() + "'s turn: "+players[i].getGamePiece());
 				System.out.println("Please input a position to take on the board: (ex: 3D) ");
 				Point inputPoint = gameGrid.convertInput(positionScanner.nextLine());
 				
-				while(!gameGrid.getAvailablePoints().contains(inputPoint)){
+				//makes sure the position entered by current player is contained in the availablePoints array
+				//if the input was invalid will ask the user for another input
+				while(!gameGrid.getAvailablePoints().contains(inputPoint))
+				{
 					System.out.println("Invalid input! Please try again: (ex: 5E) ");
 					inputPoint = gameGrid.convertInput(positionScanner.nextLine());
 				}
 				
+				//if the point is valid. modify the grid with the player's colour
+				//and the positions point vlaue to player's owned positions array
 				gameGrid.setPoint(inputPoint, players[i].getGamePiece());
 				players[i].addPosition(inputPoint);
 				
+				//checks if player has won after successful modification of grid
 				WinPatternChecker.checkForLadder(inputPoint, players, i, gameGrid);
-				if(gameGrid.getAvailablePoints().size()==0){
+				
+				//if there are no more available positions to take and no one has won yet, declare the game a tie game
+				if(gameGrid.getAvailablePoints().size()==0)
+				{
 					System.out.println("\n\nNO MORE AVAILABLE POSITIONS, TIE GAME!");
 					System.exit(0);
 				}
@@ -77,6 +92,7 @@ public class PlayGame {
 
 	Point oppositePlayerMove; 
 	
+	//minimax function for A.I. will always return best possible move
 	public int minimax(int depth, String playerToken) {
 		String oppositePlayerToken;
 		Point inputPoint = gameGrid.convertInput(positionInput);
