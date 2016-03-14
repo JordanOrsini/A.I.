@@ -59,10 +59,12 @@ public class PlayGame {
 		System.out.println("\nPlayer "+player.getName()+" created: "+player.getGamePiece()+"\n");
 	}
 
-	private void gameStart(){
+	private void gameStart()
+	{
 		
 		//game loop
-		while(!gameOver){
+		while(!gameOver)
+		{
 			
 			//alternates between player's contained in players[] array
 			//will as current player to input a position he would like to claim
@@ -101,12 +103,16 @@ public class PlayGame {
 	Point oppositePlayerMove; 
 	
 	//minimax function for A.I. will always return best possible move
-	public int minimax(int depth, String playerToken) {
+	public int minimax(int depth, String playerToken) 
+	{
 		String oppositePlayerToken;
 		Point inputPoint = gameGrid.convertInput(positionInput);
 		
-//		if (blackWins() return +1;
-//		if (whiteWins() return -1;
+		//black player is max
+		if (blackWins()) return +1;
+		
+		//white player is min
+		if (whiteWins()) return -1;
 
 		List<Point> pointsAvailable = gameGrid.getAvailablePoints();
 		if (pointsAvailable.isEmpty()) return 0; 
@@ -151,5 +157,21 @@ public class PlayGame {
 				gameGrid.resetPoint(inputPoint);
 		}
 		return playerToken.equals("\u25CF") ? max : min;
+	}
+	
+	//checks to see if black player will win in the future for minimax function
+	public boolean blackWins()
+	{
+		boolean blackHasWon = false;
+		
+		return blackHasWon;
+	}
+	
+	//checks to see if white player will win in the future for minimax function
+	public boolean whiteWins()
+	{
+		boolean whiteHasWon = false;
+		
+		return whiteHasWon;
 	}
 }
