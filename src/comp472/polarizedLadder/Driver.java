@@ -5,6 +5,8 @@
  * Zachary Bergeron
  * ID: 26593925
  * 
+ * We certify that this submission is the original work of members of the group and meets the Falculty's Expectations of Originality.
+ * March 14th, 2016
  */
 package comp472.polarizedLadder;
 
