@@ -109,11 +109,17 @@ public class PlayGame {
 		Point inputPoint = gameGrid.convertInput(positionInput);
 		
 		//black player is max
-		if (blackWins()) return +1;
+		if (blackWins()) 
+		{
+			return +1;
+		}
 		
 		//white player is min
-		if (whiteWins()) return -1;
-
+		if (whiteWins()) 
+		{
+			return -1;
+		}
+		
 		List<Point> pointsAvailable = gameGrid.getAvailablePoints();
 		if (pointsAvailable.isEmpty()) 
 		{
