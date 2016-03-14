@@ -68,7 +68,7 @@ public class PlayGame {
 				
 				WinPatternChecker.checkForLadder(inputPoint, players, i, gameGrid);
 				if(gameGrid.getAvailablePoints().size()==0){
-					System.out.println("NO MORE AVAILABLE POSITIONS, TIE GAME!");
+					System.out.println("\n\nNO MORE AVAILABLE POSITIONS, TIE GAME!");
 					System.exit(0);
 				}
 			}

@@ -40,7 +40,7 @@ public interface WinPatternChecker {
 					winningArray.add(check);
 					if(winningArray.size() == 5){
 						if(!checkBlocked(winningArray.get(2), i, players, playerNumber, grid)){
-							System.out.println("Player "+players[playerNumber].getName()+" WINS!");
+							System.out.println("\n\nPlayer "+players[playerNumber].getName()+" WINS!");
 							System.exit(0);
 						}
 					}
