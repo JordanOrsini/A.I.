@@ -1,14 +1,25 @@
+/*
+ * Jordan Orsini
+ * ID: 26471196
+ * 
+ * Zachary Bergeron
+ * ID: 26593925
+ * 
+ */
 package comp472.polarizedLadder;
 
 public class AIPlayer extends Player{
 
-	public AIPlayer(String name, int number) {
-		super(name, number);
-		// TODO Auto-generated constructor stub
+	//default constructor
+	public AIPlayer() 
+	{
+		
 	}
-
-	public AIPlayer() {
-		// TODO Auto-generated constructor stub
+	
+	//parametrized contructor
+	public AIPlayer(String name, int number)
+	{
+		super(name, number);
 	}
 
 }
