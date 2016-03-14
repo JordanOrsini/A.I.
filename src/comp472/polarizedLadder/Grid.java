@@ -149,7 +149,7 @@ public class Grid
 		availablePoints.add(new Point(2,5));
 		availablePoints.add(new Point(2,6));
 		availablePoints.add(new Point(3,4));
-		availablePoints.add(new Point(3,6));
+		availablePoints.add(new Point(3,5));
 		availablePoints.add(new Point(3,6));
 		availablePoints.add(new Point(4,3));
 		availablePoints.add(new Point(4,4));
