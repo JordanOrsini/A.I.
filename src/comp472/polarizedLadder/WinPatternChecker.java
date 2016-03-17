@@ -65,8 +65,8 @@ public interface WinPatternChecker {
 					winningArray.add(check);
 					if(winningArray.size() == 5)
 					{
-						//checks to see if a win has occured by having two points of the ladder touching the base of the grid
-						if(polarizedAtBase(winningArray))
+						//checks to see if a win has occurred by having two points of the ladder touching the base of the grid
+						if(polarizedAtBase(winningArray, grid.getBasePositions()))
 						{
 							System.out.print("Player \""+players[playerNumber].getName()+"\" WINS!");
 							System.exit(0);
@@ -108,26 +108,9 @@ public interface WinPatternChecker {
 	
 	//method that checks if the winning ladder is polarized at the base
 	//a ladder polarized at the base disregards opponent pieces that may be blocking it
-	public static boolean polarizedAtBase(ArrayList<Point> winningArray)
+	public static boolean polarizedAtBase(ArrayList<Point> winningArray, ArrayList<Point> basePositions)
 	{
 		int matches = 0;
-		
-		//arrayList containing all of the grid's base points
-		ArrayList<Point> basePositions = new ArrayList<Point>();
-		
-		basePositions.add(new Point(1,6));
-		basePositions.add(new Point(2,6));
-		basePositions.add(new Point(3,6));
-		basePositions.add(new Point(4,6));
-		basePositions.add(new Point(5,6));
-		basePositions.add(new Point(6,6));
-		basePositions.add(new Point(7,6));
-		basePositions.add(new Point(8,6));
-		basePositions.add(new Point(9,6));
-		basePositions.add(new Point(10,6));
-		basePositions.add(new Point(11,6));
-		basePositions.add(new Point(12,6));
-		basePositions.add(new Point(13,6));
 		
 		//will check how many points in the winning array are base points
 		for(int i = 0; i < winningArray.size(); i++)

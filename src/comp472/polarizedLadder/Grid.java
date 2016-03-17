@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class Grid 
 {
 	private ArrayList<Point> availablePoints;
+	private ArrayList<Point> basePositions;
 	final int GRID_ROWS = 8;
 	final int GRID_COLUMNS  = 15;
 	private String[][] gameGrid;
@@ -152,7 +153,7 @@ public class Grid
 		gameGrid[7][13] = "M";	
 		gameGrid[7][14] = " ";
 
-	
+		//array containing all points a player can take on the grid
 		availablePoints = new ArrayList<Point>();
 		
 		availablePoints.add(new Point(1,6));
@@ -204,6 +205,23 @@ public class Grid
 		availablePoints.add(new Point(12,5));
 		availablePoints.add(new Point(12,6));
 		availablePoints.add(new Point(13,6));
+		
+		//arrayList containing all of the grid's base points
+		basePositions = new ArrayList<Point>();
+				
+		basePositions.add(new Point(1,6));
+		basePositions.add(new Point(2,6));
+		basePositions.add(new Point(3,6));
+		basePositions.add(new Point(4,6));
+		basePositions.add(new Point(5,6));
+		basePositions.add(new Point(6,6));
+		basePositions.add(new Point(7,6));
+		basePositions.add(new Point(8,6));
+		basePositions.add(new Point(9,6));
+		basePositions.add(new Point(10,6));
+		basePositions.add(new Point(11,6));
+		basePositions.add(new Point(12,6));
+		basePositions.add(new Point(13,6));
 	}
 
 
@@ -342,14 +360,14 @@ public class Grid
 	//method takes a point and the player's color and modifies the string in the gameGrid's indexes corresponding
 	//to the point's coordinates and replaces it with the player's token color
 	//will also print the grid
-	void modifyGrid(Point point, String playerToken)
+	public void modifyGrid(Point point, String playerToken)
 	{
 		gameGrid[point.y][point.x] = playerToken;
 		printGrid();
 	}
 	
 	//prints the current state of the game grid to console
-	void printGrid()
+	public void printGrid()
 	{
 		for (int i=0; i<8; i++)
 		{
@@ -387,5 +405,10 @@ public class Grid
 	{
 		modifyGrid(point, "*");
 		availablePoints.add(point);
+	}
+	
+	public ArrayList<Point> getBasePositions()
+	{
+		return this.basePositions;
 	}
 }
