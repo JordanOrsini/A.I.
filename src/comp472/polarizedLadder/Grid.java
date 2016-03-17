@@ -407,6 +407,8 @@ public class Grid
 		availablePoints.add(point);
 	}
 	
+	//accessor method for basePositions
+	//returns arrayList of points representing the base of the game grid
 	public ArrayList<Point> getBasePositions()
 	{
 		return this.basePositions;
