@@ -68,14 +68,20 @@ public interface WinPatternChecker {
 						//checks to see if a win has occurred by having two points of the ladder touching the base of the grid
 						if(polarizedAtBase(winningArray, grid.getBasePositions()))
 						{
-							System.out.print("Player \""+players[playerNumber].getName()+"\" WINS!");
-							System.exit(0);
+							//System.out.print("Player \""+players[playerNumber].getName()+"\" WINS!");
+							//System.exit(0);
+							
+							//added for minimax
+							players[playerNumber].setHasWon(true);
 						}
 						//makes sure the winning pattern is not blocked by the other player before declaring a winner
 						else if(!checkBlocked(winningArray.get(2), i, players, playerNumber, grid))
 						{
-							System.out.print("Player \""+players[playerNumber].getName()+"\" WINS!");
-							System.exit(0);
+							//System.out.print("Player \""+players[playerNumber].getName()+"\" WINS!");			
+							//System.exit(0);
+							
+							//added for minimax
+							players[playerNumber].setHasWon(true);
 						}
 					}
 				}

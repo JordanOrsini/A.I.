@@ -17,6 +17,7 @@ public class Player {
 	private String name;
 	private boolean hasWon = false;
 	private String gamePiece;
+	private boolean tieGame = false;
 	
 	//default constructor
 	public Player() {
@@ -62,7 +63,7 @@ public class Player {
 	}
 	
 	//returns true if current player has won
-	public boolean isHasWon() {
+	public boolean getHasWon() {
 		return hasWon;
 	}
 	
@@ -81,8 +82,15 @@ public class Player {
 		this.gamePiece = gamePiece;
 	}
 	
+	//sets that the game has resulted in a tie
+	public void setTieGame(boolean tieGame)
+	{
+		this.tieGame = tieGame;
+	}
 	
-
-	
-
+	//returns true if the game has resulted in a tie (no more places on the game board)
+	public boolean getTieGame()
+	{
+		return tieGame;
+	}
 }

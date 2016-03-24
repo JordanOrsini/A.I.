@@ -29,8 +29,6 @@ public class PlayGame {
 
 	Grid gameGrid = new Grid();
 
-	Boolean gameOver = false;
-
 	public PlayGame(Player[] players) {
 		this.players = players;
 
@@ -63,7 +61,7 @@ public class PlayGame {
 	{
 		
 		//game loop
-		while(!gameOver)
+		while(true)
 		{
 			
 			//alternates between player's contained in players[] array
@@ -92,6 +90,21 @@ public class PlayGame {
 				
 				//if there are no more available positions to take and no one has won yet, declare the game a tie game
 				if(gameGrid.getAvailablePoints().size()==0)
+				{
+					//System.out.print("NO MORE AVAILABLE POSITIONS, TIE GAME!");
+					//System.exit(0);
+					
+					//sets in order for game to end
+					players[i].setTieGame(true);
+				}
+				
+				//will check to see if the player's move has resulted in a win or a tie game
+				if (players[i].getHasWon() == true)
+				{
+					System.out.print("Player \""+players[i].getName()+"\" WINS!");
+					System.exit(0);
+				}
+				else if (players[i].getTieGame() == true)
 				{
 					System.out.print("NO MORE AVAILABLE POSITIONS, TIE GAME!");
 					System.exit(0);
