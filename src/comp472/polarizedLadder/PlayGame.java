@@ -197,6 +197,11 @@ public class PlayGame {
 	{
 		boolean blackHasWon = false;
 		
+		if (players[0].getHasWon() == true)
+		{
+			blackHasWon = true;
+		}
+		
 		return blackHasWon;
 	}
 	
@@ -204,6 +209,11 @@ public class PlayGame {
 	public boolean whiteWins()
 	{
 		boolean whiteHasWon = false;
+		
+		if(players[1].getHasWon() == true)
+		{
+			whiteHasWon = true;
+		}
 		
 		return whiteHasWon;
 	}
