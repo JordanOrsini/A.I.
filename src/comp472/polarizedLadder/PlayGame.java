@@ -81,7 +81,7 @@ public class PlayGame {
 				}
 				
 				//if the point is valid. modify the grid with the player's colour
-				//and the positions point vlaue to player's owned positions array
+				//and the positions point value to player's owned positions array
 				gameGrid.setPoint(inputPoint, players[i].getGamePiece());
 				players[i].addPosition(inputPoint);
 				
@@ -91,9 +91,6 @@ public class PlayGame {
 				//if there are no more available positions to take and no one has won yet, declare the game a tie game
 				if(gameGrid.getAvailablePoints().size()==0)
 				{
-					//System.out.print("NO MORE AVAILABLE POSITIONS, TIE GAME!");
-					//System.exit(0);
-					
 					//sets in order for game to end
 					players[i].setTieGame(true);
 				}
