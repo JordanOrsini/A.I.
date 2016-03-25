@@ -69,24 +69,35 @@ public class PlayGame {
 			for (int i = 0; i< 2; i++)
 			{
 				System.out.println("Player " + players[i].getName() + "'s turn: "+players[i].getGamePiece());
-				System.out.println("Please input a position to take on the board: (ex: 3D) ");
-				Point inputPoint = gameGrid.convertInput(positionScanner.nextLine());
-				
-				//makes sure the position entered by current player is contained in the availablePoints array
-				//if the input was invalid will ask the user for another input
-				while(!gameGrid.getAvailablePoints().contains(inputPoint))
+					
+				//depending on if the player is a human or ai
+				if (players[i].getClass().equals(HumanPlayer.class))
 				{
-					System.out.println("Invalid input! Please try again: (ex: 5E) ");
-					inputPoint = gameGrid.convertInput(positionScanner.nextLine());
+					System.out.println("Please input a position to take on the board: (ex: 3D) ");
+				
+					Point inputPoint = gameGrid.convertInput(positionScanner.nextLine());
+				
+					//makes sure the position entered by current player is contained in the availablePoints array
+					//if the input was invalid will ask the user for another input
+					while(!gameGrid.getAvailablePoints().contains(inputPoint))
+					{
+						System.out.println("Invalid input! Please try again: (ex: 5E) ");
+						inputPoint = gameGrid.convertInput(positionScanner.nextLine());
+					}
+				
+					//if the point is valid. modify the grid with the player's colour
+					//and the positions point value to player's owned positions array
+					gameGrid.setPoint(inputPoint, players[i].getGamePiece());
+					players[i].addPosition(inputPoint);
+				
+					//checks if player has won after successful modification of grid
+					WinPatternChecker.checkForLadder(inputPoint, players, i, gameGrid);
 				}
-				
-				//if the point is valid. modify the grid with the player's colour
-				//and the positions point value to player's owned positions array
-				gameGrid.setPoint(inputPoint, players[i].getGamePiece());
-				players[i].addPosition(inputPoint);
-				
-				//checks if player has won after successful modification of grid
-				WinPatternChecker.checkForLadder(inputPoint, players, i, gameGrid);
+				//this means we are an ai player and calls to minimax should go here
+				else
+				{
+					
+				}
 				
 				//if there are no more available positions to take and no one has won yet, declare the game a tie game
 				if(gameGrid.getAvailablePoints().size()==0)
@@ -94,7 +105,6 @@ public class PlayGame {
 					//sets in order for game to end
 					players[i].setTieGame(true);
 				}
-				
 				//will check to see if the player's move has resulted in a win or a tie game
 				if (players[i].getHasWon() == true)
 				{
