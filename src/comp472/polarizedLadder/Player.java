@@ -41,6 +41,11 @@ public class Player {
 		playerPositions.add(position);
 	}
 	
+	public void removePosition(Point position)
+	{
+		playerPositions.remove(position);
+	}
+	
 	//accessor method for number
 	//returns number representing the current player
 	public int getNumber() {

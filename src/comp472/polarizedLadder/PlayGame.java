@@ -11,6 +11,7 @@ package comp472.polarizedLadder;
 import java.awt.Point;
 import java.util.List;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class PlayGame {
 
@@ -23,7 +24,7 @@ public class PlayGame {
 
 	String[] gamePieces = {"\u25CF","\u25CB"};
 
-	String positionInput;
+	String positionInput = "1A";
 
 	Player[] players;
 
@@ -91,6 +92,8 @@ public class PlayGame {
 					//and the positions point value to player's owned positions array
 					gameGrid.setPoint(inputPoint, players[i].getGamePiece());
 					players[i].addPosition(inputPoint);
+					
+					gameGrid.printGrid();
 				
 					//checks if player has won after successful modification of grid
 					WinPatternChecker.checkForLadder(inputPoint, players, i, gameGrid);
@@ -98,7 +101,16 @@ public class PlayGame {
 				//this means we are an ai player and calls to minimax should go here
 				else
 				{
-					minimax(0,players[i].getGamePiece());
+					minimax(0, players, i);
+					
+					gameGrid.setPoint(oppositePlayerMove, players[i].getGamePiece());
+					players[i].addPosition(oppositePlayerMove);
+					
+					gameGrid.printGrid();
+					
+					
+					
+					WinPatternChecker.checkForLadder(oppositePlayerMove, players, i, gameGrid);
 				}
 				
 				//if there are no more available positions to take and no one has won yet, declare the game a tie game
@@ -146,10 +158,12 @@ public class PlayGame {
 	15         return bestValue
 	*/
 	
-	public int minimax(int depth, String playerToken) 
+	List<PointsAndScores> rootsChildrenScores;
+	
+	public int minimax(int depth, Player[] myPlayers, int t) 
 	{
-		String oppositePlayerToken;
-		Point inputPoint = gameGrid.convertInput(positionInput);
+		//String oppositePlayerToken;
+		//Point inputPoint = gameGrid.convertInput(positionInput);
 		
 		//black player is max
 		if (blackWins()) 
@@ -164,27 +178,38 @@ public class PlayGame {
 		}
 		
 		List<Point> pointsAvailable = gameGrid.getAvailablePoints();
+		
 		if (pointsAvailable.isEmpty()) 
 		{
 			return 0; 
 		}
 
 		int min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;
+		
+		//List<Integer> myScores = new ArrayList<>();
 
 		for (int i = 0; i < pointsAvailable.size(); ++i)
 		{
 			Point point = pointsAvailable.get(i);  
 			
 			//Black player returns MAX
-			if (playerToken.equals("\u25CF")) 
+			if (t == 0) 
 			{
-				oppositePlayerToken = "\u25CB";
-				gameGrid.setPoint(inputPoint, playerToken);
-				int result = minimax(depth + 1, oppositePlayerToken);
+				//oppositePlayerToken = "\u25CB";
+				gameGrid.setPoint(point, myPlayers[t].getGamePiece());
+				myPlayers[t].addPosition(point);
+				
+				WinPatternChecker.checkForLadder(point, players, t, gameGrid);
+				
+				
+				int result = minimax(depth + 1, myPlayers, 1);
+				//myScores.add(result);
 				max = Math.max(result, max);
 
 				if(depth == 0)
 				{
+					//rootsChildrenScores.add(new PointsAndScores(result, point));
+					
 					System.out.println("Score for position "+(i+1)+" = "+result);
 				}
 				if(result >= 0)
@@ -196,7 +221,10 @@ public class PlayGame {
 				}
 				if(result == 1)
 				{
-					gameGrid.resetPoint(inputPoint);
+					gameGrid.resetPoint(point);
+					myPlayers[t].removePosition(point);
+					myPlayers[t].setHasWon(false);
+					myPlayers[t].setTieGame(false);
 					break;
 				} 
 				if(i == pointsAvailable.size()-1 && max < 0)
@@ -208,18 +236,34 @@ public class PlayGame {
 				}		
 			} 
 			//White player returns MIN
-			else if (playerToken.equals("\u25CB"))
+			else if (t == 1)
 			{
-				oppositePlayerToken = "\u25CF";
-				gameGrid.setPoint(inputPoint, playerToken);
-	            int currentScore = minimax(depth + 1, oppositePlayerToken);
-	            min = Math.min(currentScore, min); 
-	            if(min == -1){gameGrid.resetPoint(inputPoint); break;}
+				//oppositePlayerToken = "\u25CF";
+				gameGrid.setPoint(point, myPlayers[t].getGamePiece());
+				myPlayers[t].addPosition(point);
+				
+				WinPatternChecker.checkForLadder(point, players, t, gameGrid);
+				
+				int result = minimax(depth+ 1, myPlayers, 0);
+				
+				// myScores.add(minimax(depth + 1, oppositePlayerToken));
+				min = Math.min(result, min); 
+	            if(min == -1)
+	            {
+	            	gameGrid.resetPoint(point);
+					myPlayers[t].removePosition(point);
+					myPlayers[t].setHasWon(false);
+					myPlayers[t].setTieGame(false);
+					break;
+	            }
 	        }
-				gameGrid.resetPoint(inputPoint);
+			gameGrid.resetPoint(point);
+			myPlayers[t].removePosition(point);
+			myPlayers[t].setHasWon(false);
+			myPlayers[t].setTieGame(false);
 		}
 		
-		return playerToken.equals("\u25CF") ? max : min;
+		return t == 0?max:min;
 	}
 	
 	//checks to see if black player will win in the future for minimax function
@@ -247,4 +291,39 @@ public class PlayGame {
 		
 		return whiteHasWon;
 	}
+	
+	class PointsAndScores {
+
+	    int score;
+	    Point point;
+
+	    PointsAndScores(int score, Point point) {
+	        this.score = score;
+	        this.point = point;
+	    }
+	}
+	
+	public int returnMax(List<Integer> list) {
+        int max = Integer.MIN_VALUE;
+        int index = -1;
+        for (int i = 0; i < list.size(); ++i) {
+            if (list.get(i) > max) {
+                max = list.get(i);
+                index = i;
+            }
+        }
+        return list.get(index);
+    }
+	
+	public int returnMin(List<Integer> list) {
+        int min = Integer.MAX_VALUE;
+        int index = -1;
+        for (int i = 0; i < list.size(); ++i) {
+            if (list.get(i) < min) {
+                min = list.get(i);
+                index = i;
+            }
+        }
+        return list.get(index);
+    }
 }

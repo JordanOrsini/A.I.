@@ -363,7 +363,7 @@ public class Grid
 	public void modifyGrid(Point point, String playerToken)
 	{
 		gameGrid[point.y][point.x] = playerToken;
-		printGrid();
+	//	printGrid();
 	}
 	
 	//prints the current state of the game grid to console
@@ -405,6 +405,10 @@ public class Grid
 	{
 		modifyGrid(point, "*");
 		availablePoints.add(point);
+		
+		//reset if a player wins
+		//reset tie game
+		//remove position from player
 	}
 	
 	//accessor method for basePositions
