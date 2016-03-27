@@ -75,14 +75,16 @@ public class PlayGame {
 				{
 					System.out.println("Please input a position to take on the board: (ex: 3D) ");
 				
-					Point inputPoint = gameGrid.convertInput(positionScanner.nextLine());
+					positionInput = positionScanner.nextLine();
+					Point inputPoint = gameGrid.convertInput(positionInput);
 				
 					//makes sure the position entered by current player is contained in the availablePoints array
 					//if the input was invalid will ask the user for another input
 					while(!gameGrid.getAvailablePoints().contains(inputPoint))
 					{
 						System.out.println("Invalid input! Please try again: (ex: 5E) ");
-						inputPoint = gameGrid.convertInput(positionScanner.nextLine());
+						positionInput = positionScanner.nextLine();
+						inputPoint = gameGrid.convertInput(positionInput);
 					}
 				
 					//if the point is valid. modify the grid with the player's colour
@@ -96,7 +98,7 @@ public class PlayGame {
 				//this means we are an ai player and calls to minimax should go here
 				else
 				{
-					
+					minimax(0,players[i].getGamePiece());
 				}
 				
 				//if there are no more available positions to take and no one has won yet, declare the game a tie game
@@ -123,6 +125,27 @@ public class PlayGame {
 	Point oppositePlayerMove; 
 	
 	//minimax function for A.I. will always return best possible move
+	
+	//minimax pseudocode from wikipedia
+	/*function minimax(node, depth, maximizingPlayer)
+	02     if depth = 0 or node is a terminal node
+	03         return the heuristic value of node
+
+	04     if maximizingPlayer
+	05         bestValue := −∞
+	06         for each child of node
+	07             v := minimax(child, depth − 1, FALSE)
+	08             bestValue := max(bestValue, v)
+	09         return bestValue
+
+	10     else    (* minimizing player *)
+	11         bestValue := +∞
+	12         for each child of node
+	13             v := minimax(child, depth − 1, TRUE)
+	14             bestValue := min(bestValue, v)
+	15         return bestValue
+	*/
+	
 	public int minimax(int depth, String playerToken) 
 	{
 		String oppositePlayerToken;
