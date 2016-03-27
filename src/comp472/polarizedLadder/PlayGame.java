@@ -103,6 +103,11 @@ public class PlayGame {
 				{
 					callMinimax(0, i);
 					
+					players[0].setHasWon(false);
+					players[0].setTieGame(false);
+					players[1].setHasWon(false);
+					players[1].setTieGame(false);
+					
 					for(PointsAndScores pas : rootsChildrenScores)
 					{
 						System.out.println("Points: " + pas.point + " Score: " + pas.score);
@@ -198,10 +203,8 @@ public class PlayGame {
 			}
 			
 			gameGrid.resetPoint(point);
-			players[0].setHasWon(false);
-			players[1].setHasWon(false);
-			players[0].setTieGame(false);
-			players[1].setTieGame(false);
+			players[0].removePosition(point);
+			players[1].removePosition(point);
 		
 		}
 		
