@@ -101,7 +101,14 @@ public class PlayGame {
 				//this means we are an ai player and calls to minimax should go here
 				else
 				{
-					minimax(0, players, i);
+					callMinimax(0, i);
+					
+					for(PointsAndScores pas : rootsChildrenScores)
+					{
+						System.out.println("Points: " + pas.point + " Score: " + pas.score);
+					}
+					
+					Point oppositePlayerMove = returnBestMove();
 					
 					gameGrid.setPoint(oppositePlayerMove, players[i].getGamePiece());
 					players[i].addPosition(oppositePlayerMove);
@@ -133,141 +140,76 @@ public class PlayGame {
 			}
 		}
 	}
-
-	Point oppositePlayerMove; 
 	
-	//minimax function for A.I. will always return best possible move
-	
-	//minimax pseudocode from wikipedia
-	/*function minimax(node, depth, maximizingPlayer)
-	02     if depth = 0 or node is a terminal node
-	03         return the heuristic value of node
-
-	04     if maximizingPlayer
-	05         bestValue := −∞
-	06         for each child of node
-	07             v := minimax(child, depth − 1, FALSE)
-	08             bestValue := max(bestValue, v)
-	09         return bestValue
-
-	10     else    (* minimizing player *)
-	11         bestValue := +∞
-	12         for each child of node
-	13             v := minimax(child, depth − 1, TRUE)
-	14             bestValue := min(bestValue, v)
-	15         return bestValue
-	*/
-	
-	List<PointsAndScores> rootsChildrenScores;
-	
-	public int minimax(int depth, Player[] myPlayers, int t) 
+	private int minimax(int depth, int turn)
 	{
-		//String oppositePlayerToken;
-		//Point inputPoint = gameGrid.convertInput(positionInput);
-		
-		//black player is max
-		if (blackWins()) 
+		if(blackWins() == true)
 		{
-			return +1;
+			return 1;
 		}
 		
-		//white player is min
-		if (whiteWins()) 
+		if(whiteWins() == true)
 		{
 			return -1;
 		}
 		
-		List<Point> pointsAvailable = gameGrid.getAvailablePoints();
+		ArrayList<Point> availablePlaces = gameGrid.getAvailablePoints();
 		
-		if (pointsAvailable.isEmpty()) 
+		if(availablePlaces.isEmpty() == true)
 		{
-			return 0; 
+			return 0;
 		}
-
-		int min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;
 		
-		//List<Integer> myScores = new ArrayList<>();
-
-		for (int i = 0; i < pointsAvailable.size(); ++i)
+		ArrayList<Integer> scores = new ArrayList<>();
+		
+		for(int i = 0; i < availablePlaces.size(); ++i)
 		{
-			Point point = pointsAvailable.get(i);  
-			
-			//Black player returns MAX
-			if (t == 0) 
+			Point point = availablePlaces.get(i);
+		
+		
+			if(turn == 0)
 			{
-				//oppositePlayerToken = "\u25CB";
-				gameGrid.setPoint(point, myPlayers[t].getGamePiece());
-				myPlayers[t].addPosition(point);
+				gameGrid.setPoint(point, players[0].getGamePiece());
+				players[0].addPosition(point);
+				WinPatternChecker.checkForLadder(point, players, turn, gameGrid);
 				
-				WinPatternChecker.checkForLadder(point, players, t, gameGrid);
+				int currentScore = minimax(depth + 1, 1);
+				scores.add(currentScore);
 				
-				
-				int result = minimax(depth + 1, myPlayers, 1);
-				//myScores.add(result);
-				max = Math.max(result, max);
-
 				if(depth == 0)
 				{
-					//rootsChildrenScores.add(new PointsAndScores(result, point));
-					
-					System.out.println("Score for position "+(i+1)+" = "+result);
+					rootsChildrenScores.add(new PointsAndScores(currentScore, point));
 				}
-				if(result >= 0)
-				{
-					if(depth == 0)
-					{
-						oppositePlayerMove = point;
-					}
-				}
-				if(result == 1)
-				{
-					gameGrid.resetPoint(point);
-					myPlayers[t].removePosition(point);
-					myPlayers[t].setHasWon(false);
-					myPlayers[t].setTieGame(false);
-					break;
-				} 
-				if(i == pointsAvailable.size()-1 && max < 0)
-				{
-					if(depth == 0)
-					{
-						oppositePlayerMove = point;
-					}
-				}		
-			} 
-			//White player returns MIN
-			else if (t == 1)
+				
+			}
+			else if(turn == 1)
 			{
-				//oppositePlayerToken = "\u25CF";
-				gameGrid.setPoint(point, myPlayers[t].getGamePiece());
-				myPlayers[t].addPosition(point);
+				gameGrid.setPoint(point, players[1].getGamePiece());
+				players[1].addPosition(point);
+				WinPatternChecker.checkForLadder(point, players, turn, gameGrid);
 				
-				WinPatternChecker.checkForLadder(point, players, t, gameGrid);
+				int currentScore = minimax(depth + 1, 0);
+				scores.add(currentScore);
 				
-				int result = minimax(depth+ 1, myPlayers, 0);
-				
-				// myScores.add(minimax(depth + 1, oppositePlayerToken));
-				min = Math.min(result, min); 
-	            if(min == -1)
-	            {
-	            	gameGrid.resetPoint(point);
-					myPlayers[t].removePosition(point);
-					myPlayers[t].setHasWon(false);
-					myPlayers[t].setTieGame(false);
-					break;
-	            }
-	        }
+				if(depth == 0)
+				{
+					rootsChildrenScores.add(new PointsAndScores(currentScore, point));
+				}
+			}
+			
 			gameGrid.resetPoint(point);
-			myPlayers[t].removePosition(point);
-			myPlayers[t].setHasWon(false);
-			myPlayers[t].setTieGame(false);
+			players[0].setHasWon(false);
+			players[1].setHasWon(false);
+			players[0].setTieGame(false);
+			players[1].setTieGame(false);
+		
 		}
 		
-		return t == 0?max:min;
+		return turn == 0? returnMax(scores) : returnMin (scores);
 	}
 	
 	//checks to see if black player will win in the future for minimax function
-	public boolean blackWins()
+	private boolean blackWins()
 	{
 		boolean blackHasWon = false;
 		
@@ -280,50 +222,81 @@ public class PlayGame {
 	}
 	
 	//checks to see if white player will win in the future for minimax function
-	public boolean whiteWins()
-	{
-		boolean whiteHasWon = false;
-		
-		if(players[1].getHasWon() == true)
+		public boolean whiteWins()
 		{
-			whiteHasWon = true;
+			boolean whiteHasWon = false;
+			
+			if(players[1].getHasWon() == true)
+			{
+				whiteHasWon = true;
+			}
+			
+			return whiteHasWon;
 		}
 		
-		return whiteHasWon;
-	}
-	
-	class PointsAndScores {
+		class PointsAndScores {
 
-	    int score;
-	    Point point;
+		    int score;
+		    Point point;
 
-	    PointsAndScores(int score, Point point) {
-	        this.score = score;
-	        this.point = point;
+		    PointsAndScores(int score, Point point) {
+		        this.score = score;
+		        this.point = point;
+		    }
+		}
+		
+		public Point returnBestMove() {
+	        int MAX = -100000;
+	        int best = -1;
+	        
+	        if (rootsChildrenScores.size() == 0)
+	        {
+	        	System.out.println("rootsChildrenScores is empty!!!!");
+	        	System.exit(0);
+	        }
+
+	        for (int i = 0; i < rootsChildrenScores.size(); ++i) { 
+	            if (MAX < rootsChildrenScores.get(i).score)
+	            {
+	                MAX = rootsChildrenScores.get(i).score;
+	                best = i;
+	            }
+	        }
+
+	        return rootsChildrenScores.get(best).point;
 	    }
-	}
-	
-	public int returnMax(List<Integer> list) {
-        int max = Integer.MIN_VALUE;
-        int index = -1;
-        for (int i = 0; i < list.size(); ++i) {
-            if (list.get(i) > max) {
-                max = list.get(i);
-                index = i;
-            }
-        }
-        return list.get(index);
-    }
-	
-	public int returnMin(List<Integer> list) {
-        int min = Integer.MAX_VALUE;
-        int index = -1;
-        for (int i = 0; i < list.size(); ++i) {
-            if (list.get(i) < min) {
-                min = list.get(i);
-                index = i;
-            }
-        }
-        return list.get(index);
-    }
+		
+		public int returnMin(List<Integer> list) {
+	        int min = Integer.MAX_VALUE;
+	        int index = -1;
+	        for (int i = 0; i < list.size(); ++i) {
+	            if (list.get(i) < min) {
+	                min = list.get(i);
+	                index = i;
+	            }
+	        }
+	        return list.get(index);
+	    }
+		
+		public int returnMax(List<Integer> list) {
+	        int max = Integer.MIN_VALUE;
+	        int index = -1;
+	        for (int i = 0; i < list.size(); ++i) {
+	            if (list.get(i) > max) {
+	                max = list.get(i);
+	                index = i;
+	            }
+	        }
+	        return list.get(index);
+	    }
+		
+		List<PointsAndScores> rootsChildrenScores;
+		
+		public void callMinimax(int depth, int turn){
+	        rootsChildrenScores = new ArrayList<>();
+	        minimax(depth, turn);
+	    }
+
+
 }
+	
