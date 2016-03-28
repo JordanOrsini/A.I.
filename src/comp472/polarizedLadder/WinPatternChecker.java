@@ -44,13 +44,11 @@ public interface WinPatternChecker {
 		//LEFT LADDER PATTERN INDEXES (1, 3, 5, 7, 9)
 		
 	};
-	
 	//method checks for a winning pattern by cross referencing player's owned positions
 	//with patterns[][] 2D array. will add values in patterns[][] to player's owned points
 	//in order for the win pattern to be detected across the whole gameGrid
 	public static void checkForLadder(Point currentPosition, Player players[], int playerNumber, Grid grid)
 	{
-		
 		for (int i = 0; i < patterns.length; i++)
 		{
 			ArrayList<Point> winningArray = new ArrayList<Point>();
@@ -63,6 +61,7 @@ public interface WinPatternChecker {
 				if(players[playerNumber].getPlayerPositions().contains(check))
 				{
 					winningArray.add(check);
+					
 					if(winningArray.size() == 5)
 					{
 						//checks to see if a win has occurred by having two points of the ladder touching the base of the grid

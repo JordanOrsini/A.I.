@@ -60,11 +60,9 @@ public class PlayGame {
 
 	private void gameStart()
 	{
-		
 		//game loop
 		while(true)
 		{
-			
 			//alternates between player's contained in players[] array
 			//will as current player to input a position he would like to claim
 			for (int i = 0; i< 2; i++)
@@ -119,8 +117,6 @@ public class PlayGame {
 					players[i].addPosition(oppositePlayerMove);
 					
 					gameGrid.printGrid();
-					
-					
 					
 					WinPatternChecker.checkForLadder(oppositePlayerMove, players, i, gameGrid);
 				}
@@ -237,18 +233,21 @@ public class PlayGame {
 			return whiteHasWon;
 		}
 		
-		class PointsAndScores {
+		class PointsAndScores
+{
 
 		    int score;
 		    Point point;
 
-		    PointsAndScores(int score, Point point) {
+		    PointsAndScores(int score, Point point)
+		    {
 		        this.score = score;
 		        this.point = point;
 		    }
 		}
 		
-		public Point returnBestMove() {
+		public Point returnBestMove() 
+		{
 	        int MAX = -100000;
 	        int best = -1;
 	        
@@ -258,7 +257,8 @@ public class PlayGame {
 	        	System.exit(0);
 	        }
 
-	        for (int i = 0; i < rootsChildrenScores.size(); ++i) { 
+	        for (int i = 0; i < rootsChildrenScores.size(); ++i) 
+	        { 
 	            if (MAX < rootsChildrenScores.get(i).score)
 	            {
 	                MAX = rootsChildrenScores.get(i).score;
@@ -269,11 +269,14 @@ public class PlayGame {
 	        return rootsChildrenScores.get(best).point;
 	    }
 		
-		public int returnMin(List<Integer> list) {
+		public int returnMin(List<Integer> list) 
+		{
 	        int min = Integer.MAX_VALUE;
 	        int index = -1;
-	        for (int i = 0; i < list.size(); ++i) {
-	            if (list.get(i) < min) {
+	        for (int i = 0; i < list.size(); ++i) 
+	        {
+	            if (list.get(i) < min) 
+	            {
 	                min = list.get(i);
 	                index = i;
 	            }
@@ -281,11 +284,14 @@ public class PlayGame {
 	        return list.get(index);
 	    }
 		
-		public int returnMax(List<Integer> list) {
+		public int returnMax(List<Integer> list) 
+		{
 	        int max = Integer.MIN_VALUE;
 	        int index = -1;
-	        for (int i = 0; i < list.size(); ++i) {
-	            if (list.get(i) > max) {
+	        for (int i = 0; i < list.size(); ++i)
+	        {
+	            if (list.get(i) > max) 
+	            {
 	                max = list.get(i);
 	                index = i;
 	            }
@@ -295,7 +301,8 @@ public class PlayGame {
 		
 		List<PointsAndScores> rootsChildrenScores;
 		
-		public void callMinimax(int depth, int turn){
+		public void callMinimax(int depth, int turn)
+		{
 	        rootsChildrenScores = new ArrayList<>();
 	        minimax(depth, turn);
 	    }
