@@ -124,6 +124,8 @@ public class PlayGame {
 					
 					Point oppositePlayerMove = returnBestMove(choice);
 					
+					System.out.println("\nA.I. move: " + oppositePlayerMove + "\n");
+					
 					gameGrid.setPoint(oppositePlayerMove, players[i].getGamePiece());
 					players[i].addPosition(oppositePlayerMove);
 					
@@ -153,73 +155,159 @@ public class PlayGame {
 		}
 	}
 	
+	int myScore = 0;
+	ArrayList<Integer> scores = new ArrayList<>();
+	int maxDepth = 3;
+	
 	private int minimax(int depth, int turn)
 	{	
-		int maxDepth = 3;
+		int other;
 		
-		ArrayList<Integer> scores = new ArrayList<>();
-		
-		if(blackWins() == true)
+		if (turn == 0)
 		{
-			return 1000;
+			other = 1;
+		}
+		else
+		{
+			other = 0;
 		}
 		
-		if(whiteWins() == true)
+		if(depth == 1)
 		{
-			return -1000;
-		}
-		
-		if (depth == maxDepth)
-		{
-			if(players[turn].getLastMoveScore() == 4)
+			if(players[other].getLastMoveScore() == 5)
 			{
-				if (turn == 0)
+				System.out.println("\nCAN WIN!\n");
+				
+				if(other == 0)
 				{
-					return 500;
+					myScore = myScore + 10000000;
 				}
 				else
 				{
-					return -500;
+					myScore = myScore - 10000000;
 				}
+				
+				players[other].setLastMoveScore(0);
+				return 0;
+			}
+		}
+		
+		if (depth == 2)
+		{
+			if(players[other].getLastMoveScore() == 5)
+			{
+				System.out.println("\nNEED TO BLOCK!\n");
+				
+				if(other == 1)
+				{
+					myScore = myScore + 10000000;
+				}
+				else
+				{
+					myScore = myScore - 10000000;
+				}
+				players[other].setLastMoveScore(0);
+				return 0;
+			}
+		}
+		
+		if(players[other].getLastMoveScore() == 5)
+		{
+			if(other == 0)
+			{
+				myScore = myScore + 1000;
+			}
+			else
+			{
+				myScore = myScore - 1000;
 			}
 			
-			if(players[turn].getLastMoveScore() == 3)
+			if(depth == maxDepth)
 			{
-				if (turn == 0)
-				{
-					return 250;
-				}
-				else
-				{
-					return -250;
-				}
+				players[other].setLastMoveScore(0);
+				return 0;
 			}
 			
-			if(players[turn].getLastMoveScore() == 2)
+			
+		}
+		
+		if(players[other].getLastMoveScore() == 4)
+		{
+			if (other == 0)
 			{
-				if (turn == 0)
-				{
-					return 125;
-				}
-				else
-				{
-					return -125;
-				}
+				myScore = myScore + 100;
+				
 			}
-			if(players[turn].getLastMoveScore() == 1)
+			else
 			{
-				if(turn == 0)
-				{
-					return 50;
-				}
-				else
-				{
-					return -50;
-				}
+				myScore = myScore -100;
+				
+			}
+			
+			if(depth == maxDepth)
+			{
+				players[other].setLastMoveScore(0);
+				return 0;
 			}
 		}
 		
+		if(players[other].getLastMoveScore() == 3)
+		{
+			if (other == 0)
+			{
+				myScore = myScore + 20;
+				
+			}
+			else
+			{
+				myScore = myScore - 20;
+				
+			}
+			
+			if(depth == maxDepth)
+			{
+				players[other].setLastMoveScore(0);
+				return 0;
+			}
+		}
 		
+		if(players[other].getLastMoveScore() == 2)
+		{
+			if (other == 0)
+			{
+				myScore = myScore + 2;
+				
+			}
+			else
+			{
+				myScore = myScore - 2;
+			}
+			
+			if(depth == maxDepth)
+			{
+				players[other].setLastMoveScore(0);
+				return 0;
+			}
+		}
+		if(players[other].getLastMoveScore() == 1)
+		{
+			if(other == 0)
+			{
+				myScore = myScore + 1;
+				
+			}
+			else
+			{
+				myScore = myScore - 1;
+				
+			}
+			
+			if(depth == maxDepth)
+			{
+				players[other].setLastMoveScore(0);
+				return 0;
+			}
+		}
 		
 		ArrayList<Point> availablePlaces = gameGrid.getAvailablePoints();
 		
@@ -239,13 +327,14 @@ public class PlayGame {
 				players[0].addPosition(point);
 				WinPatternChecker.checkForLadder(point, players, turn, gameGrid);
 				
-				int currentScore = minimax(depth + 1, 1);
+				minimax(depth + 1, 1);
 				
-				scores.add(currentScore);
+				scores.add(myScore);
 				
 				if(depth == 0)
 				{
-					rootsChildrenScores.add(new PointsAndScores(currentScore, point));
+					rootsChildrenScores.add(new PointsAndScores(myScore, point));
+					myScore = 0;
 				}
 				
 			}
@@ -255,13 +344,14 @@ public class PlayGame {
 				players[1].addPosition(point);
 				WinPatternChecker.checkForLadder(point, players, turn, gameGrid);
 				
-				int currentScore = minimax(depth + 1, 0);
+				minimax(depth + 1, 0);
 				
-				scores.add(currentScore);
+				scores.add(myScore);
 				
 				if(depth == 0)
 				{
-					rootsChildrenScores.add(new PointsAndScores(currentScore, point));
+					rootsChildrenScores.add(new PointsAndScores(myScore, point));
+					myScore = 0;
 				}
 			}
 			
@@ -327,8 +417,6 @@ public class PlayGame {
 
 	        if(choice.equals("maximum"))
 	        {	
-	        	System.out.println("MAXIMUM!!");
-	        	
 	        	for (int i = 0; i < rootsChildrenScores.size(); ++i) 
 	        	{ 
 	        		if (MAX < rootsChildrenScores.get(i).score)
@@ -340,8 +428,6 @@ public class PlayGame {
 	        }
 	        else
 	        {
-	        	System.out.println("MINIMUM!");
-	        	
 	        	for (int j = 0; j < rootsChildrenScores.size(); ++j)
 	        	{
 	        		if(MIN > rootsChildrenScores.get(j).score)
