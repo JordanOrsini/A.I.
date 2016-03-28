@@ -62,6 +62,8 @@ public interface WinPatternChecker {
 				{
 					winningArray.add(check);
 					
+					players[playerNumber].setLastMoveScore(winningArray.size());
+					
 					if(winningArray.size() == 5)
 					{
 						//checks to see if a win has occurred by having two points of the ladder touching the base of the grid

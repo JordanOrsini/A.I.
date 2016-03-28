@@ -18,6 +18,7 @@ public class Player {
 	private boolean hasWon = false;
 	private String gamePiece;
 	private boolean tieGame = false;
+	private int lastMoveScore;
 	
 	//default constructor
 	public Player() {
@@ -97,5 +98,15 @@ public class Player {
 	public boolean getTieGame()
 	{
 		return tieGame;
+	}
+	
+	public void setLastMoveScore(int score)
+	{
+		lastMoveScore = score;
+	}
+	
+	public int getLastMoveScore()
+	{
+		return lastMoveScore;
 	}
 }

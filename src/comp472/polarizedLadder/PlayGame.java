@@ -23,8 +23,10 @@ public class PlayGame {
 	Scanner positionScanner = new Scanner (System.in);
 
 	String[] gamePieces = {"\u25CF","\u25CB"};
+	
+	String choice;
 
-	String positionInput = "1A";
+	String positionInput;
 
 	Player[] players;
 
@@ -111,7 +113,16 @@ public class PlayGame {
 						System.out.println("Points: " + pas.point + " Score: " + pas.score);
 					}
 					
-					Point oppositePlayerMove = returnBestMove();
+					if(i == 0)
+					{
+						choice = "maximum";
+					}
+					else
+					{
+						choice = "minimum";
+					}
+					
+					Point oppositePlayerMove = returnBestMove(choice);
 					
 					gameGrid.setPoint(oppositePlayerMove, players[i].getGamePiece());
 					players[i].addPosition(oppositePlayerMove);
@@ -143,16 +154,72 @@ public class PlayGame {
 	}
 	
 	private int minimax(int depth, int turn)
-	{
+	{	
+		int maxDepth = 3;
+		
+		ArrayList<Integer> scores = new ArrayList<>();
+		
 		if(blackWins() == true)
 		{
-			return 1;
+			return 1000;
 		}
 		
 		if(whiteWins() == true)
 		{
-			return -1;
+			return -1000;
 		}
+		
+		if (depth == maxDepth)
+		{
+			if(players[turn].getLastMoveScore() == 4)
+			{
+				if (turn == 0)
+				{
+					return 500;
+				}
+				else
+				{
+					return -500;
+				}
+			}
+			
+			if(players[turn].getLastMoveScore() == 3)
+			{
+				if (turn == 0)
+				{
+					return 250;
+				}
+				else
+				{
+					return -250;
+				}
+			}
+			
+			if(players[turn].getLastMoveScore() == 2)
+			{
+				if (turn == 0)
+				{
+					return 125;
+				}
+				else
+				{
+					return -125;
+				}
+			}
+			if(players[turn].getLastMoveScore() == 1)
+			{
+				if(turn == 0)
+				{
+					return 50;
+				}
+				else
+				{
+					return -50;
+				}
+			}
+		}
+		
+		
 		
 		ArrayList<Point> availablePlaces = gameGrid.getAvailablePoints();
 		
@@ -160,8 +227,6 @@ public class PlayGame {
 		{
 			return 0;
 		}
-		
-		ArrayList<Integer> scores = new ArrayList<>();
 		
 		for(int i = 0; i < availablePlaces.size(); ++i)
 		{
@@ -175,6 +240,7 @@ public class PlayGame {
 				WinPatternChecker.checkForLadder(point, players, turn, gameGrid);
 				
 				int currentScore = minimax(depth + 1, 1);
+				
 				scores.add(currentScore);
 				
 				if(depth == 0)
@@ -190,6 +256,7 @@ public class PlayGame {
 				WinPatternChecker.checkForLadder(point, players, turn, gameGrid);
 				
 				int currentScore = minimax(depth + 1, 0);
+				
 				scores.add(currentScore);
 				
 				if(depth == 0)
@@ -246,9 +313,10 @@ public class PlayGame {
 		    }
 		}
 		
-		public Point returnBestMove() 
+		public Point returnBestMove(String choice) 
 		{
 	        int MAX = -100000;
+	        int MIN = 100000;
 	        int best = -1;
 	        
 	        if (rootsChildrenScores.size() == 0)
@@ -257,13 +325,31 @@ public class PlayGame {
 	        	System.exit(0);
 	        }
 
-	        for (int i = 0; i < rootsChildrenScores.size(); ++i) 
-	        { 
-	            if (MAX < rootsChildrenScores.get(i).score)
-	            {
-	                MAX = rootsChildrenScores.get(i).score;
-	                best = i;
-	            }
+	        if(choice.equals("maximum"))
+	        {	
+	        	System.out.println("MAXIMUM!!");
+	        	
+	        	for (int i = 0; i < rootsChildrenScores.size(); ++i) 
+	        	{ 
+	        		if (MAX < rootsChildrenScores.get(i).score)
+	        		{
+	        			MAX = rootsChildrenScores.get(i).score;
+	        			best = i;
+	        		}
+	        	}
+	        }
+	        else
+	        {
+	        	System.out.println("MINIMUM!");
+	        	
+	        	for (int j = 0; j < rootsChildrenScores.size(); ++j)
+	        	{
+	        		if(MIN > rootsChildrenScores.get(j).score)
+	        		{
+	        			MIN = rootsChildrenScores.get(j).score;
+	        			best = j;
+	        		}
+	        	}
 	        }
 
 	        return rootsChildrenScores.get(best).point;
