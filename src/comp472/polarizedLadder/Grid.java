@@ -401,10 +401,10 @@ public class Grid
 	}
 	
 	//removes possession of a point. will reset game grid value to default "*" at the given point
-	public void resetPoint (Point point)
+	public void resetPoint (int index, Point point)
 	{
 		modifyGrid(point, "*");
-		availablePoints.add(point);
+		availablePoints.add(index, point);
 		
 		//reset if a player wins
 		//reset tie game

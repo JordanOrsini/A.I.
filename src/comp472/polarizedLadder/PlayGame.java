@@ -200,11 +200,11 @@ public class PlayGame {
 				
 				if(other == 1)
 				{
-					myScore = myScore + 10000000;
+					myScore = myScore + 1000000;
 				}
 				else
 				{
-					myScore = myScore - 10000000;
+					myScore = myScore - 1000000;
 				}
 				players[other].setLastMoveScore(0);
 				return 0;
@@ -320,7 +320,6 @@ public class PlayGame {
 		{
 			Point point = availablePlaces.get(i);
 		
-		
 			if(turn == 0)
 			{
 				gameGrid.setPoint(point, players[0].getGamePiece());
@@ -355,7 +354,7 @@ public class PlayGame {
 				}
 			}
 			
-			gameGrid.resetPoint(point);
+			gameGrid.resetPoint(i, point);
 			players[0].removePosition(point);
 			players[1].removePosition(point);
 		
