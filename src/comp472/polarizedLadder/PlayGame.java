@@ -174,251 +174,262 @@ public class PlayGame {
 		{
 			other = 0;
 		}
-		
-		if(depth == 1)
+			
+		if(depth != 0)
 		{
-			if(players[other].getLastMoveScore() == 5)
+			if(depth == 1)
 			{
-				System.out.println("\nCAN WIN!\n");
-				
-				if(other == 0)
+				if(players[other].getLastMoveScore() == 5)
 				{
-					myScore = myScore + 10000000;
-				}
-				else
-				{
-					myScore = myScore - 10000000;
-				}
-				
-				//scores.add(myScore);
-				
-				players[other].setLastMoveScore(0);
-				return 0;
-			}
-		}
-		
-		if (depth == 2)
-		{
-			if(players[other].getLastMoveScore() == 5)
-			{
-				System.out.println("\nNEED TO BLOCK!\n");
-				
-				if(other == 0)
-				{
-					myScore = myScore + 1000000;
-				}
-				else
-				{
-					myScore = myScore - 1000000;
-				}
-				
-				//scores.add(myScore);
-
-				players[other].setLastMoveScore(0);
-				return 0;
-			}
-		}
-		
-		if(players[other].getLastMoveScore() == 5)
-		{
-			//tempScore = myScore;
-			
-			if(other == 0)
-			{
-				myScore = myScore + 1000;
-			}
-			else
-			{
-				myScore = myScore - 1000;
-			}
-			
-			if(depth == maxDepth)
-			{
-				/*if(other == 0)
-				{
-					if (myScore > maxScore)
-					{
-						maxScore = myScore;
-					}
-				}
-				else
-				{
-					if(myScore < minScore)
-					{
-						minScore = myScore;
-					}
-				}*/
-				
-			//	scores.add(myScore);
-				
-			//	myScore = tempScore;
-				
-				players[other].setLastMoveScore(0);
-				return 0;
-			}
-			
-			
-		}
-		
-		if(players[other].getLastMoveScore() == 4)
-		{
-			//tempScore = myScore;
-			
-			if (other == 0)
-			{
-				myScore = myScore + 100;
-				
-			}
-			else
-			{
-				myScore = myScore -100;
-				
-			}
-			
-			if(depth == maxDepth)
-			{
-				/*if(other == 0)
-				{
-					if (myScore > maxScore)
-					{
-						maxScore = myScore;
-					}
-				}
-				else
-				{
-					if(myScore < minScore)
-					{
-						minScore = myScore;
-					}
-				}*/
-				
-			//	scores.add(myScore);
-
-				//myScore = tempScore;
+					System.out.println("\nCAN WIN!\n");
 					
-				players[other].setLastMoveScore(0);
-				return 0;
-			}
-		}
-		
-		if(players[other].getLastMoveScore() == 3)
-		{
-			//tempScore = myScore;
-			
-			if (other == 0)
-			{
-				myScore = myScore + 20;
-				
-			}
-			else
-			{
-				myScore = myScore - 20;
-				
-			}
-			
-			if(depth == maxDepth)
-			{
-				/*if(other == 0)
-				{
-					if (myScore > maxScore)
+					if(other == 0)
 					{
-						maxScore = myScore;
+						myScore = myScore + 10000000;
 					}
+					else
+					{
+						myScore = myScore - 10000000;
+					}
+					
+					//scores.add(myScore);
+					
+					players[other].setLastMoveScore(0);
+					return 0;
+				}
+			}
+			
+			if (depth == 2)
+			{
+				if(players[other].getLastMoveScore() == 5)
+				{
+					System.out.println("\nNEED TO BLOCK!\n");
+					
+					if(other == 0)
+					{
+						myScore = myScore + 1000000;
+					}
+					else
+					{
+						myScore = myScore - 1000000;
+					}
+					
+					//scores.add(myScore);
+
+					players[other].setLastMoveScore(0);
+					return 0;
+				}
+			}
+			
+			if(players[other].getLastMoveScore() == 5)
+			{
+				//tempScore = myScore;
+				
+				//System.out.println("Score 5 at depth: " + depth+ " for player: " + other);
+				
+				if(other == 0)
+				{
+					myScore = myScore + 500;
 				}
 				else
 				{
-					if(myScore < minScore)
-					{
-						minScore = myScore;
-					}
-				}*/
+					myScore = myScore - 500;
+				}
 				
-			//	scores.add(myScore);
-
-			//	myScore = tempScore;
-				
-				players[other].setLastMoveScore(0);
-				return 0;
-			}
-		}
-		
-		if(players[other].getLastMoveScore() == 2)
-		{
-			//tempScore = myScore;
-			
-			if (other == 0)
-			{
-				myScore = myScore + 2;
-				
-			}
-			else
-			{
-				myScore = myScore - 2;
-			}
-			
-			if(depth == maxDepth)
-			{
-				/*if(other == 0)
+				if(depth == maxDepth)
 				{
-					if (myScore > maxScore)
+					/*if(other == 0)
 					{
-						maxScore = myScore;
+						if (myScore > maxScore)
+						{
+							maxScore = myScore;
+						}
 					}
+					else
+					{
+						if(myScore < minScore)
+						{
+							minScore = myScore;
+						}
+					}*/
+					
+				//	scores.add(myScore);
+					
+				//	myScore = tempScore;
+					
+					players[other].setLastMoveScore(0);
+					return 0;
+				}
+			}
+			
+			if(players[other].getLastMoveScore() == 4)
+			{
+				//System.out.println("Score 4 at depth: " + depth+ " for player: " + other);
+				
+				//tempScore = myScore;
+				
+				if (other == 0)
+				{
+					myScore = myScore + 100;
+					
 				}
 				else
 				{
-					if(myScore < minScore)
-					{
-						minScore = myScore;
-					}
-				}*/
+					myScore = myScore -100;
+					
+				}
 				
-				//scores.add(myScore);
-
-				//myScore = tempScore;
-				
-				players[other].setLastMoveScore(0);
-				return 0;
-			}
-		}
-		if(players[other].getLastMoveScore() == 1)
-		{
-			//tempScore = myScore;
-			
-			if(other == 0)
-			{
-				myScore = myScore + 1;
-				
-			}
-			else
-			{
-				myScore = myScore - 1;
-				
-			}
-			
-			if(depth == maxDepth)
-			{
-				/*if(other == 0)
+				if(depth == maxDepth)
 				{
-					if (myScore > maxScore)
+					/*if(other == 0)
 					{
-						maxScore = myScore;
+						if (myScore > maxScore)
+						{
+							maxScore = myScore;
+						}
 					}
+					else
+					{
+						if(myScore < minScore)
+						{
+							minScore = myScore;
+						}
+					}*/
+					
+				//	scores.add(myScore);
+
+					//myScore = tempScore;
+						
+					players[other].setLastMoveScore(0);
+					return 0;
+				}
+			}
+			
+			if(players[other].getLastMoveScore() == 3)
+			{
+				//System.out.println("Score 3 at depth: " + depth+ " for player: " + other);
+				
+				//tempScore = myScore;
+				
+				if (other == 0)
+				{
+					myScore = myScore + 20;
+					
 				}
 				else
 				{
-					if(myScore < minScore)
+					myScore = myScore - 20;
+					
+				}
+				
+				if(depth == maxDepth)
+				{
+					/*if(other == 0)
 					{
-						minScore = myScore;
+						if (myScore > maxScore)
+						{
+							maxScore = myScore;
+						}
 					}
-				}*/
-				
-				//scores.add(myScore);
+					else
+					{
+						if(myScore < minScore)
+						{
+							minScore = myScore;
+						}
+					}*/
+					
+				//	scores.add(myScore);
 
-				//myScore = tempScore;
+				//	myScore = tempScore;
+					
+					players[other].setLastMoveScore(0);
+					return 0;
+				}
+			}
+			
+			if(players[other].getLastMoveScore() == 2)
+			{
 				
-				players[other].setLastMoveScore(0);
-				return 0;
+				//System.out.println("Score 2 at depth: " + depth + " for player: " + other);
+				//tempScore = myScore;
+				
+				if (other == 0)
+				{
+					myScore = myScore + 2;
+					
+				}
+				else
+				{
+					myScore = myScore - 2;
+				}
+				
+				if(depth == maxDepth)
+				{
+					/*if(other == 0)
+					{
+						if (myScore > maxScore)
+						{
+							maxScore = myScore;
+						}
+					}
+					else
+					{
+						if(myScore < minScore)
+						{
+							minScore = myScore;
+						}
+					}*/
+					
+					//scores.add(myScore);
+
+					//myScore = tempScore;
+					
+					players[other].setLastMoveScore(0);
+					return 0;
+				}
+			}
+			if(players[other].getLastMoveScore() == 1)
+			{
+				//System.out.println("Score 1 at depth: " + depth + " for player: " + other);
+				
+				//tempScore = myScore;
+				
+				if(other == 0)
+				{
+					myScore = myScore + 1;
+					
+				}
+				else
+				{
+					myScore = myScore - 1;
+					
+				}
+				
+				if(depth == maxDepth)
+				{
+					/*if(other == 0)
+					{
+						if (myScore > maxScore)
+						{
+							maxScore = myScore;
+						}
+					}
+					else
+					{
+						if(myScore < minScore)
+						{
+							minScore = myScore;
+						}
+					}*/
+					
+					//scores.add(myScore);
+
+					//myScore = tempScore;
+					
+					players[other].setLastMoveScore(0);
+					return 0;
+				}
 			}
 		}
 		
