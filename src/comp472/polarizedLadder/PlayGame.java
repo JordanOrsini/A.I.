@@ -124,7 +124,8 @@ public class PlayGame {
 					
 					Point oppositePlayerMove = returnBestMove(choice);
 					
-					System.out.println("\nA.I. move: " + oppositePlayerMove + "\n");
+					System.out.println("\nA.I. move: " + oppositePlayerMove);
+					System.out.println("A.I. move: " + gameGrid.reverseConvertInput(oppositePlayerMove) + "\n");
 					
 					gameGrid.setPoint(oppositePlayerMove, players[i].getGamePiece());
 					players[i].addPosition(oppositePlayerMove);

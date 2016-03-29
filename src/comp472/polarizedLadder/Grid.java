@@ -357,6 +357,210 @@ public class Grid
 		}
 	}
 	
+	public String reverseConvertInput(Point point)
+	{
+		String output = "";
+		
+		if(point.x == 1 && point.y == 6)
+		{
+			output = "1A";
+		}	
+		else if(point.x == 2 && point.y == 6)
+		{
+			output = "1B";
+		}
+		else if(point.x == 3 && point.y == 6)
+		{
+			output = "1C";
+		}
+		else if(point.x == 4 && point.y == 6)
+		{
+			output = "1D";
+		}
+		else if(point.x == 5 && point.y == 6)
+		{
+			output = "1E";
+		}
+		else if(point.x == 6 && point.y == 6)
+		{
+			output = "1F";
+		}
+		else if(point.x == 7 && point.y == 6)
+		{
+			output = "1G";
+		}
+		else if(point.x == 8 && point.y == 6)
+		{
+			output = "1H";
+		}
+		else if(point.x == 9 && point.y == 6)
+		{
+			output = "1I";
+		}
+		else if(point.x == 10 && point.y == 6)
+		{
+			output = "1J";
+		}
+		else if(point.x == 11 && point.y == 6)
+		{
+			output = "1K";
+		}
+		else if(point.x == 12 && point.y == 6)
+		{
+			output = "1L";
+		}
+		else if(point.x == 13 && point.y == 6)
+		{
+			output = "1M";
+		}
+		else if(point.x == 2 && point.y == 5)
+		{
+			output = "2B";
+		}
+		else if(point.x == 3 && point.y == 5)
+		{
+			output = "2C";
+		}
+		else if(point.x == 4 && point.y == 5)
+		{
+			output = "2D";
+		}
+		else if(point.x == 5 && point.y == 5)
+		{
+			output = "2E";
+		}
+		else if(point.x == 6 && point.y == 5)
+		{
+			output = "2F";
+		}
+		else if(point.x == 7 && point.y == 5)
+		{
+			output = "2G";
+		}
+		else if(point.x == 8 && point.y == 5)
+		{
+			output = "2H";
+		}
+		else if(point.x == 9 && point.y == 5)
+		{
+			output = "2I";
+		}
+		else if(point.x == 10 && point.y == 5)
+		{
+			output = "2J";
+		}
+		else if(point.x == 11 && point.y == 5)
+		{
+			output = "2K";
+		}
+		else if(point.x == 12 && point.y == 5)
+		{
+			output = "2L";
+		}
+		else if(point.x == 3 && point.y == 4)
+		{
+			output = "3C";
+		}
+		else if(point.x == 4 && point.y == 4)
+		{
+			output = "3D";
+		}
+		else if(point.x == 5 && point.y == 4)
+		{
+			output = "3E";
+		}
+		else if(point.x == 6 && point.y == 4)
+		{
+			output = "3F";
+		}
+		else if(point.x == 7 && point.y == 4)
+		{
+			output = "3G";
+		}
+		else if(point.x == 8 && point.y == 4)
+		{
+			output = "3H";
+		}
+		else if(point.x == 9 && point.y == 4)
+		{
+			output = "3I";
+		}
+		else if(point.x == 10 && point.y == 4)
+		{
+			output = "3J";
+		}
+		else if(point.x == 11 && point.y == 4)
+		{
+			output = "3K";
+		}
+		else if(point.x == 4 && point.y == 3)
+		{
+			output = "4D";
+		}
+		else if(point.x == 5 && point.y == 3)
+		{
+			output = "4E";
+		}
+		else if(point.x == 6 && point.y == 3)
+		{
+			output = "4F";
+		}
+		else if(point.x == 7 && point.y == 3)
+		{
+			output = "4G";
+		}
+		else if(point.x == 8 && point.y == 3)
+		{
+			output = "4H";
+		}
+		else if(point.x == 9 && point.y == 3)
+		{
+			output = "4I";
+		}
+		else if(point.x == 10 && point.y == 3)
+		{
+			output = "4J";
+		}
+		else if(point.x == 5 && point.y == 2)
+		{
+			output = "5E";
+		}
+		else if(point.x == 6 && point.y == 2)
+		{
+			output = "5F";
+		}
+		else if(point.x == 7 && point.y == 2)
+		{
+			output = "5G";
+		}
+		else if(point.x == 8 && point.y == 2)
+		{
+			output = "5H";
+		}
+		else if(point.x == 9 && point.y == 2)
+		{
+			output = "5I";
+		}
+		else if(point.x == 6 && point.y == 1)
+		{
+			output = "6F";
+		}
+		else if(point.x == 7 && point.y == 1)
+		{
+			output = "6G";
+		}
+		else if(point.x == 8 && point.y == 1)
+		{
+			output = "6H";
+		}
+		else if(point.x == 7 && point.y == 0)
+		{
+			output = "7G";
+		}
+		
+		return output;
+	}
+	
 	//method takes a point and the player's color and modifies the string in the gameGrid's indexes corresponding
 	//to the point's coordinates and replaces it with the player's token color
 	//will also print the grid
