@@ -156,6 +156,9 @@ public class PlayGame {
 	}
 	
 	int myScore = 0;
+	int maxScore = Integer.MIN_VALUE;
+	int minScore = Integer.MAX_VALUE;
+	int tempScore = 0;
 	ArrayList<Integer> scores = new ArrayList<>();
 	int maxDepth = 3;
 	
@@ -187,6 +190,8 @@ public class PlayGame {
 					myScore = myScore - 10000000;
 				}
 				
+				//scores.add(myScore);
+				
 				players[other].setLastMoveScore(0);
 				return 0;
 			}
@@ -198,7 +203,7 @@ public class PlayGame {
 			{
 				System.out.println("\nNEED TO BLOCK!\n");
 				
-				if(other == 1)
+				if(other == 0)
 				{
 					myScore = myScore + 1000000;
 				}
@@ -206,6 +211,9 @@ public class PlayGame {
 				{
 					myScore = myScore - 1000000;
 				}
+				
+				//scores.add(myScore);
+
 				players[other].setLastMoveScore(0);
 				return 0;
 			}
@@ -213,6 +221,8 @@ public class PlayGame {
 		
 		if(players[other].getLastMoveScore() == 5)
 		{
+			//tempScore = myScore;
+			
 			if(other == 0)
 			{
 				myScore = myScore + 1000;
@@ -224,6 +234,25 @@ public class PlayGame {
 			
 			if(depth == maxDepth)
 			{
+				/*if(other == 0)
+				{
+					if (myScore > maxScore)
+					{
+						maxScore = myScore;
+					}
+				}
+				else
+				{
+					if(myScore < minScore)
+					{
+						minScore = myScore;
+					}
+				}*/
+				
+			//	scores.add(myScore);
+				
+			//	myScore = tempScore;
+				
 				players[other].setLastMoveScore(0);
 				return 0;
 			}
@@ -233,6 +262,8 @@ public class PlayGame {
 		
 		if(players[other].getLastMoveScore() == 4)
 		{
+			//tempScore = myScore;
+			
 			if (other == 0)
 			{
 				myScore = myScore + 100;
@@ -246,6 +277,25 @@ public class PlayGame {
 			
 			if(depth == maxDepth)
 			{
+				/*if(other == 0)
+				{
+					if (myScore > maxScore)
+					{
+						maxScore = myScore;
+					}
+				}
+				else
+				{
+					if(myScore < minScore)
+					{
+						minScore = myScore;
+					}
+				}*/
+				
+			//	scores.add(myScore);
+
+				//myScore = tempScore;
+					
 				players[other].setLastMoveScore(0);
 				return 0;
 			}
@@ -253,6 +303,8 @@ public class PlayGame {
 		
 		if(players[other].getLastMoveScore() == 3)
 		{
+			//tempScore = myScore;
+			
 			if (other == 0)
 			{
 				myScore = myScore + 20;
@@ -266,6 +318,25 @@ public class PlayGame {
 			
 			if(depth == maxDepth)
 			{
+				/*if(other == 0)
+				{
+					if (myScore > maxScore)
+					{
+						maxScore = myScore;
+					}
+				}
+				else
+				{
+					if(myScore < minScore)
+					{
+						minScore = myScore;
+					}
+				}*/
+				
+			//	scores.add(myScore);
+
+			//	myScore = tempScore;
+				
 				players[other].setLastMoveScore(0);
 				return 0;
 			}
@@ -273,6 +344,8 @@ public class PlayGame {
 		
 		if(players[other].getLastMoveScore() == 2)
 		{
+			//tempScore = myScore;
+			
 			if (other == 0)
 			{
 				myScore = myScore + 2;
@@ -285,12 +358,33 @@ public class PlayGame {
 			
 			if(depth == maxDepth)
 			{
+				/*if(other == 0)
+				{
+					if (myScore > maxScore)
+					{
+						maxScore = myScore;
+					}
+				}
+				else
+				{
+					if(myScore < minScore)
+					{
+						minScore = myScore;
+					}
+				}*/
+				
+				//scores.add(myScore);
+
+				//myScore = tempScore;
+				
 				players[other].setLastMoveScore(0);
 				return 0;
 			}
 		}
 		if(players[other].getLastMoveScore() == 1)
 		{
+			//tempScore = myScore;
+			
 			if(other == 0)
 			{
 				myScore = myScore + 1;
@@ -304,6 +398,25 @@ public class PlayGame {
 			
 			if(depth == maxDepth)
 			{
+				/*if(other == 0)
+				{
+					if (myScore > maxScore)
+					{
+						maxScore = myScore;
+					}
+				}
+				else
+				{
+					if(myScore < minScore)
+					{
+						minScore = myScore;
+					}
+				}*/
+				
+				//scores.add(myScore);
+
+				//myScore = tempScore;
+				
 				players[other].setLastMoveScore(0);
 				return 0;
 			}
@@ -328,12 +441,14 @@ public class PlayGame {
 				
 				minimax(depth + 1, 1);
 				
-				scores.add(myScore);
+				//scores.add(myScore);
 				
 				if(depth == 0)
 				{
 					rootsChildrenScores.add(new PointsAndScores(myScore, point));
 					myScore = 0;
+					//maxScore = 0;
+					//minScore = 0;
 				}
 				
 			}
@@ -345,22 +460,23 @@ public class PlayGame {
 				
 				minimax(depth + 1, 0);
 				
-				scores.add(myScore);
+				//scores.add(myScore);
 				
 				if(depth == 0)
 				{
 					rootsChildrenScores.add(new PointsAndScores(myScore, point));
 					myScore = 0;
+					//maxScore = 0;
+					//minScore = 0;
 				}
 			}
 			
 			gameGrid.resetPoint(i, point);
 			players[0].removePosition(point);
-			players[1].removePosition(point);
-		
+			players[1].removePosition(point);		
 		}
 		
-		return turn == 0? returnMax(scores) : returnMin (scores);
+		return 0;//turn == 0? returnMax(scores) : returnMin (scores);
 	}
 	
 	//checks to see if black player will win in the future for minimax function
@@ -440,7 +556,7 @@ public class PlayGame {
 	        return rootsChildrenScores.get(best).point;
 	    }
 		
-		public int returnMin(List<Integer> list) 
+		public int returnMin(ArrayList<Integer> list) 
 		{
 	        int min = Integer.MAX_VALUE;
 	        int index = -1;
@@ -455,7 +571,7 @@ public class PlayGame {
 	        return list.get(index);
 	    }
 		
-		public int returnMax(List<Integer> list) 
+		public int returnMax(ArrayList<Integer> list) 
 		{
 	        int max = Integer.MIN_VALUE;
 	        int index = -1;
