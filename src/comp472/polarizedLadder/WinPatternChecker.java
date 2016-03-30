@@ -49,6 +49,8 @@ public interface WinPatternChecker {
 	//in order for the win pattern to be detected across the whole gameGrid
 	public static void checkForLadder(Point currentPosition, Player players[], int playerNumber, Grid grid)
 	{
+		int highestWinPatternSize = 0;
+		
 		for (int i = 0; i < patterns.length; i++)
 		{
 			ArrayList<Point> winningArray = new ArrayList<Point>();
@@ -62,7 +64,11 @@ public interface WinPatternChecker {
 				{
 					winningArray.add(check);
 					
-					players[playerNumber].setLastMoveScore(winningArray.size());
+					if (winningArray.size() > highestWinPatternSize)
+					{
+						highestWinPatternSize = winningArray.size();
+						players[playerNumber].setLastMoveScore(highestWinPatternSize);
+					}
 					
 					if(winningArray.size() == 5)
 					{
