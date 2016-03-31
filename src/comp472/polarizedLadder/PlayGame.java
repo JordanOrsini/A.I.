@@ -103,6 +103,8 @@ public class PlayGame {
 				//this means we are an ai player and calls to minimax should go here
 				else
 				{
+					long start = System.nanoTime();
+					
 					rootScores = new ArrayList<>();
 					
 					minimax(0, i);
@@ -112,10 +114,10 @@ public class PlayGame {
 					players[1].setHasWon(false);
 					players[1].setTieGame(false);
 					
-					for(PointScore pas : rootScores)
-					{
-						System.out.println("Points: " + pas.point + " Score: " + pas.score);
-					}
+					//for (int z = 0; z < rootScores.size(); z++)
+					//{
+					//	System.out.println("Position: " + gameGrid.reverseConvertInput(rootScores.get(z).point) + " Score: " + rootScores.get(z).score);
+					//}
 					
 					if(i == 0)
 					{
@@ -128,8 +130,11 @@ public class PlayGame {
 					
 					Point oppositePlayerMove = getComputerMove(choice);
 					
-					System.out.println("\nA.I. move: " + oppositePlayerMove);
-					System.out.println("A.I. move: " + gameGrid.reverseConvertInput(oppositePlayerMove) + "\n");
+					long end = System.nanoTime();
+					long elapsed = end - start;
+					double seconds = (double)elapsed / 1000000000;
+					
+					System.out.println("\nA.I.'s move: " + gameGrid.reverseConvertInput(oppositePlayerMove) + "\nTime elapsed: " + seconds + " seconds\n");
 					
 					gameGrid.setPoint(oppositePlayerMove, players[i].getGamePiece());
 					players[i].addPosition(oppositePlayerMove);
