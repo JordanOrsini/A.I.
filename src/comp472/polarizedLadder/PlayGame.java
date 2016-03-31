@@ -192,7 +192,7 @@ public class PlayGame {
 				{	
 					if(players[0].getLastMoveScore() == 5)
 					{
-						myScore = myScore + Integer.MAX_VALUE;
+						myScore = Integer.MAX_VALUE;
 						rootScores.add(new PointScore(myScore, point));
 						
 						gameGrid.resetPoint(i, point);
@@ -208,7 +208,7 @@ public class PlayGame {
 						
 						if (players[1].getLastMoveScore() == 5)
 						{
-							myScore = myScore + Integer.MAX_VALUE;
+							myScore = Integer.MAX_VALUE;
 							rootScores.add(new PointScore(myScore, point));
 							
 							gameGrid.resetPoint(i, point);
@@ -273,7 +273,7 @@ public class PlayGame {
 				{	
 					if(players[1].getLastMoveScore() == 5)
 					{
-						myScore = myScore - Integer.MAX_VALUE;
+						myScore = Integer.MIN_VALUE;
 						rootScores.add(new PointScore(myScore, point));
 						
 						gameGrid.resetPoint(i, point);
@@ -289,7 +289,7 @@ public class PlayGame {
 						
 						if (players[0].getLastMoveScore() == 5)
 						{
-							myScore = myScore - Integer.MAX_VALUE;
+							myScore = Integer.MIN_VALUE;
 							rootScores.add(new PointScore(myScore, point));
 							
 							gameGrid.resetPoint(i, point);
