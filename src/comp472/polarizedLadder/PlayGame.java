@@ -60,6 +60,8 @@ public class PlayGame {
 		System.out.println("\nPlayer "+player.getName()+" created: "+player.getGamePiece()+"\n");
 	}
 
+	List<PointScore> rootScores;
+	
 	private void gameStart()
 	{
 		//game loop
@@ -101,14 +103,16 @@ public class PlayGame {
 				//this means we are an ai player and calls to minimax should go here
 				else
 				{
-					callMinimax(0, i);
+					rootScores = new ArrayList<>();
+					
+					minimax(0, i);
 					
 					players[0].setHasWon(false);
 					players[0].setTieGame(false);
 					players[1].setHasWon(false);
 					players[1].setTieGame(false);
 					
-					for(PointsAndScores pas : rootsChildrenScores)
+					for(PointScore pas : rootScores)
 					{
 						System.out.println("Points: " + pas.point + " Score: " + pas.score);
 					}
@@ -122,7 +126,7 @@ public class PlayGame {
 						choice = "minimum";
 					}
 					
-					Point oppositePlayerMove = returnBestMove(choice);
+					Point oppositePlayerMove = getComputerMove(choice);
 					
 					System.out.println("\nA.I. move: " + oppositePlayerMove);
 					System.out.println("A.I. move: " + gameGrid.reverseConvertInput(oppositePlayerMove) + "\n");
@@ -157,13 +161,10 @@ public class PlayGame {
 	}
 	
 	int myScore = 0;
-	int maxScore = Integer.MIN_VALUE;
-	int minScore = Integer.MAX_VALUE;
-	int tempScore = 0;
 	ArrayList<Integer> scores = new ArrayList<>();
 	int maxDepth = 3;
 	
-	private int minimax(int depth, int turn)
+	private int minimax(int depth, int playerNumber)
 	{	
 		ArrayList<Point> availablePlaces = gameGrid.getAvailablePoints();
 		
@@ -176,7 +177,7 @@ public class PlayGame {
 		{
 			Point point = availablePlaces.get(i);
 		
-			if(turn == 0)
+			if(playerNumber == 0)
 			{
 				gameGrid.setPoint(point, players[0].getGamePiece());
 				players[0].addPosition(point);
@@ -187,7 +188,7 @@ public class PlayGame {
 					if(players[0].getLastMoveScore() == 5)
 					{
 						myScore = myScore + 10000000;
-						rootsChildrenScores.add(new PointsAndScores(myScore, point));
+						rootScores.add(new PointScore(myScore, point));
 						return 0;
 					}
 					else
@@ -198,7 +199,7 @@ public class PlayGame {
 						if (players[1].getLastMoveScore() == 5)
 						{
 							myScore = myScore + 1000000;
-							rootsChildrenScores.add(new PointsAndScores(myScore, point));
+							rootScores.add(new PointScore(myScore, point));
 							return 0;
 						}
 						else
@@ -239,18 +240,14 @@ public class PlayGame {
 				
 				minimax(depth + 1, 1);
 				
-				//scores.add(myScore);
-				
 				if(depth == 0)
 				{
-					rootsChildrenScores.add(new PointsAndScores(myScore, point));
+					rootScores.add(new PointScore(myScore, point));
 					myScore = 0;
-					//maxScore = 0;
-					//minScore = 0;
 				}
 				
 			}
-			else if(turn == 1)
+			else if(playerNumber == 1)
 			{	
 				gameGrid.setPoint(point, players[1].getGamePiece());
 				players[1].addPosition(point);
@@ -261,7 +258,7 @@ public class PlayGame {
 					if(players[1].getLastMoveScore() == 5)
 					{
 						myScore = myScore - 10000000;
-						rootsChildrenScores.add(new PointsAndScores(myScore, point));
+						rootScores.add(new PointScore(myScore, point));
 						return 0;
 					}
 					else
@@ -272,7 +269,7 @@ public class PlayGame {
 						if (players[0].getLastMoveScore() == 5)
 						{
 							myScore = myScore - 1000000;
-							rootsChildrenScores.add(new PointsAndScores(myScore, point));
+							rootScores.add(new PointScore(myScore, point));
 							return 0;
 						}
 						else
@@ -313,15 +310,10 @@ public class PlayGame {
 				
 				minimax(depth + 1, 0);
 				
-				
-				//scores.add(myScore);
-				
 				if(depth == 0)
 				{
-					rootsChildrenScores.add(new PointsAndScores(myScore, point));
+					rootScores.add(new PointScore(myScore, point));
 					myScore = 0;
-					//maxScore = 0;
-					//minScore = 0;
 				}
 			}
 			
@@ -330,98 +322,39 @@ public class PlayGame {
 			players[1].removePosition(point);		
 		}
 		
-		return 0;//turn == 0? returnMax(scores) : returnMin (scores);
+		return 0;
 	}
-		
-		class PointsAndScores
-{
+	
+	public Point getComputerMove(String choice) 
+	{
+        int maximum = Integer.MIN_VALUE;
+        int minimum = Integer.MAX_VALUE;
+        int selectedMove = -1;
+        
+        if(choice.equals("maximum"))
+        {	
+        	for (int i = 0; i < rootScores.size(); ++i) 
+        	{ 
+        		if (maximum < rootScores.get(i).score)
+        		{
+        			maximum = rootScores.get(i).score;
+        			selectedMove = i;
+        		}
+        	}
+        }
+        else
+        {
+        	for (int j = 0; j < rootScores.size(); ++j)
+        	{
+        		if(minimum > rootScores.get(j).score)
+        		{
+        			minimum = rootScores.get(j).score;
+        			selectedMove = j;
+        		}
+        	}
+        }
 
-		    int score;
-		    Point point;
-
-		    PointsAndScores(int score, Point point)
-		    {
-		        this.score = score;
-		        this.point = point;
-		    }
-		}
-		
-		public Point returnBestMove(String choice) 
-		{
-	        int MAX = Integer.MIN_VALUE;
-	        int MIN = Integer.MAX_VALUE;
-	        int best = -1;
-	        
-	        if (rootsChildrenScores.size() == 0)
-	        {
-	        	System.out.println("rootsChildrenScores is empty!!!!");
-	        	System.exit(0);
-	        }
-
-	        if(choice.equals("maximum"))
-	        {	
-	        	for (int i = 0; i < rootsChildrenScores.size(); ++i) 
-	        	{ 
-	        		if (MAX < rootsChildrenScores.get(i).score)
-	        		{
-	        			MAX = rootsChildrenScores.get(i).score;
-	        			best = i;
-	        		}
-	        	}
-	        }
-	        else
-	        {
-	        	for (int j = 0; j < rootsChildrenScores.size(); ++j)
-	        	{
-	        		if(MIN > rootsChildrenScores.get(j).score)
-	        		{
-	        			MIN = rootsChildrenScores.get(j).score;
-	        			best = j;
-	        		}
-	        	}
-	        }
-
-	        return rootsChildrenScores.get(best).point;
-	    }
-		
-		public int returnMin(ArrayList<Integer> list) 
-		{
-	        int min = Integer.MAX_VALUE;
-	        int index = -1;
-	        for (int i = 0; i < list.size(); ++i) 
-	        {
-	            if (list.get(i) < min) 
-	            {
-	                min = list.get(i);
-	                index = i;
-	            }
-	        }
-	        return list.get(index);
-	    }
-		
-		public int returnMax(ArrayList<Integer> list) 
-		{
-	        int max = Integer.MIN_VALUE;
-	        int index = -1;
-	        for (int i = 0; i < list.size(); ++i)
-	        {
-	            if (list.get(i) > max) 
-	            {
-	                max = list.get(i);
-	                index = i;
-	            }
-	        }
-	        return list.get(index);
-	    }
-		
-		List<PointsAndScores> rootsChildrenScores;
-		
-		public void callMinimax(int depth, int turn)
-		{
-	        rootsChildrenScores = new ArrayList<>();
-	        minimax(depth, turn);
-	    }
-
-
+        return rootScores.get(selectedMove).point;
+    }
 }
 	
