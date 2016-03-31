@@ -187,8 +187,13 @@ public class PlayGame {
 				{	
 					if(players[0].getLastMoveScore() == 5)
 					{
-						myScore = myScore + 10000000;
+						myScore = myScore + Integer.MAX_VALUE;
 						rootScores.add(new PointScore(myScore, point));
+						
+						gameGrid.resetPoint(i, point);
+						players[0].removePosition(point);
+						players[1].removePosition(point);		
+						
 						return 0;
 					}
 					else
@@ -198,8 +203,13 @@ public class PlayGame {
 						
 						if (players[1].getLastMoveScore() == 5)
 						{
-							myScore = myScore + 1000000;
+							myScore = myScore + Integer.MAX_VALUE;
 							rootScores.add(new PointScore(myScore, point));
+							
+							gameGrid.resetPoint(i, point);
+							players[0].removePosition(point);
+							players[1].removePosition(point);		
+							
 							return 0;
 						}
 						else
@@ -235,6 +245,7 @@ public class PlayGame {
 					gameGrid.resetPoint(i, point);
 					players[0].removePosition(point);
 					players[1].removePosition(point);		
+					
 					return 0;
 				}
 				
@@ -257,8 +268,13 @@ public class PlayGame {
 				{	
 					if(players[1].getLastMoveScore() == 5)
 					{
-						myScore = myScore - 10000000;
+						myScore = myScore - Integer.MAX_VALUE;
 						rootScores.add(new PointScore(myScore, point));
+						
+						gameGrid.resetPoint(i, point);
+						players[0].removePosition(point);
+						players[1].removePosition(point);		
+						
 						return 0;
 					}
 					else
@@ -268,8 +284,13 @@ public class PlayGame {
 						
 						if (players[0].getLastMoveScore() == 5)
 						{
-							myScore = myScore - 1000000;
+							myScore = myScore - Integer.MAX_VALUE;
 							rootScores.add(new PointScore(myScore, point));
+							
+							gameGrid.resetPoint(i, point);
+							players[0].removePosition(point);
+							players[1].removePosition(point);		
+							
 							return 0;
 						}
 						else
@@ -305,6 +326,7 @@ public class PlayGame {
 					gameGrid.resetPoint(i, point);
 					players[0].removePosition(point);
 					players[1].removePosition(point);		
+					
 					return 0;
 				}
 				
