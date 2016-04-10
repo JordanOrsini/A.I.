@@ -10,13 +10,13 @@ package comp472.polarizedLadder;
 
 public class HumanPlayer extends Player{
 
-	//default contructor
+	//default constructor
 	public HumanPlayer() 
 	{
 		super();
 	} 
 	
-	//parametrized contructor
+	//parameterized constructor
 	public HumanPlayer(String name, int number) 
 	{
 		super(name, number);

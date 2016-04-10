@@ -16,7 +16,7 @@ public class AIPlayer extends Player{
 		
 	}
 	
-	//parametrized contructor
+	//parameterized constructor
 	public AIPlayer(String name, int number)
 	{
 		super(name, number);
